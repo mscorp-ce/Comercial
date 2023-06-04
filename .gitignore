@@ -1,0 +1,9 @@
+__history/
+__recovery/
+*.exe
+*.map
+*.dcu
+*.stat
+*.local
+*.identcache
+*.res
