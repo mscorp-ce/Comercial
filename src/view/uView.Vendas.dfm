@@ -57,7 +57,20 @@ inherited frmVenda: TfrmVenda
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object edtVenda: TEdit [4]
+  object lblStatus: TLabel [4]
+    Left = 629
+    Top = 15
+    Width = 37
+    Height = 13
+    Caption = 'Status'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object edtIdVenda: TEdit [5]
     Left = 8
     Top = 35
     Width = 121
@@ -65,7 +78,7 @@ inherited frmVenda: TfrmVenda
     ReadOnly = True
     TabOrder = 0
   end
-  object edtTotal: TEdit [5]
+  object edtTotal: TEdit [6]
     Left = 524
     Top = 35
     Width = 99
@@ -132,6 +145,18 @@ inherited frmVenda: TfrmVenda
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
     end
+  end
+  object cbxStatus: TComboBox
+    Tag = 4
+    Left = 629
+    Top = 34
+    Width = 145
+    Height = 22
+    Style = csOwnerDrawFixed
+    TabOrder = 6
+    Items.Strings = (
+      'Pendente'
+      'Efetivada')
   end
   object cdsClientes: TClientDataSet
     Aggregates = <>

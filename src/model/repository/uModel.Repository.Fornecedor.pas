@@ -19,7 +19,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TFornecedor;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: TFornecedor): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
     function FindAll: TObjectList<TFornecedor>; overload;
     function FindAll(CommadSQL: String): TObjectList<TFornecedor>;overload;
     function Frist: TFornecedor;
@@ -187,7 +187,7 @@ begin
   end;
 end;
 
-function TFornecedorRepository.FindExists(CommadSQL: String; Entity: TFornecedor): Boolean;
+function TFornecedorRepository.FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean;
 var
   Statement: IStatement;
 begin

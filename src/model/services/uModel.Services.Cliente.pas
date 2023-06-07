@@ -19,7 +19,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TCliente;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: TCliente): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
     function FindAll: TObjectList<TCliente>; overload;
     function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
     function Frist: TCliente;
@@ -83,9 +83,9 @@ begin
   Result:= ClienteRepository.FindById(Id);
 end;
 
-function TClienteService.FindExists(CommadSQL: String; Entity: TCliente): Boolean;
+function TClienteService.FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean;
 begin
-  Result:= ClienteRepository.FindExists(CommadSQL, Entity);
+  Result:= ClienteRepository.FindExists(CommadSQL, Parameter, Entity);
 end;
 
 function TClienteService.FindExists: Boolean;
@@ -139,7 +139,7 @@ begin
       Exit;
     end;
 
-  if FindExists(ctSQLClienteFindExistsCpf, Entity) then
+  if FindExists(ctSQLClienteFindExistsCpf, 'cpf', Entity) then
     begin
       MessageContext:= 'Cpf já cadastrado.';
     end;

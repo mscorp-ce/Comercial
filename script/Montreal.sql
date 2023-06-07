@@ -21,10 +21,6 @@ CREATE SEQUENCE SEQ_CLIENTES
  INCREMENT BY 1;
 
 
-INSERT INTO Clientes VALUES('Marcio', '65392140300', 'A', CONVERT(DATETIME, '1980-01-12', 102) );
-INSERT INTO Clientes VALUES('Julia', '64395134030', 'A', CONVERT(DATETIME, '2016-05-07', 102) );
-
-
 CREATE TABLE Fornecedores(
 idfornecedor int not null,
 nome_fantasia varchar(100) not null,
@@ -43,14 +39,11 @@ CREATE SEQUENCE SEQ_FORNECEDORES
  INCREMENT BY 1;
 
 
-INSERT INTO Fornecedores VALUES('MS Technologies', 'MS Technologies LTDA', '32892000152', 'A' );
-
-
 CREATE TABLE Produtos(
 idproduto int not null,
 descricao varchar(255) not null,
-preco_unitario numeric(15,2) not null,
 idfornecedor int not null,
+preco_unitario numeric(15,2) not null,
 status char(1) not null default 'A',
 CONSTRAINT CHK_status_Pro CHECK (status in('A', 'I')),
 CONSTRAINT FK_idfornecedor_Pro FOREIGN KEY(idfornecedor) REFERENCES Fornecedores(idfornecedor),

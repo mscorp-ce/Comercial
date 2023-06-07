@@ -28,6 +28,10 @@ const
 
   ctSQLFornecedorFindExistsCnpj = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE cnpj = :cnpj';
 
+  ctSQLFornecedorFindExistsInativo = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE idfornecedor = :idfornecedor and status = ''I''';
+
+  ctSQLFornecedorFindExistsIdFornecedor = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE idfornecedor = :idfornecedor';
+
   ctSQLFornecedores = 'SELECT frn.idfornecedor, frn.nome_fantasia, frn.razao_social, frn.cnpj, frn.status FROM Fornecedores frn';
 
   ctSQLFornecedorWhere = ' WHERE frn.idfornecedor = :idfornecedor';
@@ -44,6 +48,23 @@ const
                           ' WHERE idfornecedor = :idfornecedor';
 
   ctSQLFornecedorDeleteByID = 'DELETE FROM Fornecedores WHERE idfornecedor = :idfornecedor';
+
+  ctSQLProdutos = 'SELECT pro.idproduto, pro.descricao, pro.idfornecedor, pro.preco_unitario, pro.status FROM Produtos pro';
+
+  ctSQLProdutoWhere = ' WHERE pro.idproduto = :idproduto';
+
+  ctSQLProdutoFindID = ctSQLProdutos + ctSQLProdutoWhere;
+
+  ctNextValueProdutos = 'SELECT NEXT VALUE FOR SEQ_PRODUTOS AS currentID';
+
+  ctSQLProdutoInsert = 'INSERT INTO Produtos(idproduto, descricao, idfornecedor, preco_unitario, status)' +
+                       ' VALUES(:idproduto, :descricao, :idfornecedor, :preco_unitario, :status)';
+
+  ctSQLProdutoUpdate = 'UPDATE Produtos' +
+                       '   SET descricao = :descricao, idfornecedor = :idfornecedor, preco_unitario = :preco_unitario, status = :status' +
+                       ' WHERE idproduto = :idproduto';
+
+  ctSQLProdutoDeleteByID = 'DELETE FROM Produtos WHERE idproduto = :idproduto';
 
 
   ctSQLVendas = 'SELECT ven.idvenda, ven.dthr_venda, ven.idcliente, cli.nome AS nome_cliente, '+

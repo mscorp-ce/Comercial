@@ -12,7 +12,7 @@ uses
 type
   TfrmVenda = class(TfrmBaseRegistration)
     lblIdVenda: TLabel;
-    edtVenda: TEdit;
+    edtIdVenda: TEdit;
     lblDtVenda: TLabel;
     lblCliente: TLabel;
     lblTotal: TLabel;
@@ -27,6 +27,8 @@ type
     dsVendas: TDataSource;
     Panel1: TPanel;
     DBGrid1: TDBGrid;
+    lblStatus: TLabel;
+    cbxStatus: TComboBox;
   protected
     procedure DoShow; override;
   private
@@ -56,6 +58,10 @@ type
     property Id: Integer read FId write SetId;
     destructor Destroy; override;
   end;
+
+const
+  ctPendente = 0;
+  ctEfetivada = 1;
 
 var
   frmVenda: TfrmVenda;
@@ -104,9 +110,15 @@ end;
 procedure TfrmVenda.SetProperty;
 begin
   inherited;
+  Venda.IdVenda:= StrToIntDef(edtIdVenda.Text, 0);
   Venda.DataHoraVenda:= cpDtVenda.Date;
   Venda.Cliente.IdCliente:= lcbCliente.KeyValue;
   Venda.Total:= StrToFloatDef(edtTotal.Text, 0);
+
+  case cbxStatus.ItemIndex of
+    ctPendente: Venda.Status:= 'P';
+    ctEfetivada: Venda.Status:= 'E';
+  end;
 end;
 
 procedure TfrmVenda.SQLClientes;
@@ -198,7 +210,6 @@ end;
 procedure TfrmVenda.AfterSave;
 begin
   inherited;
-  edtVenda.Text:= IntToStr( Venda.IdVenda );
   GetTotalizadores;
 end;
 
@@ -248,10 +259,14 @@ end;
 procedure TfrmVenda.GetProperty;
 begin
   inherited;
-  edtVenda.Text:= IntToStr( Venda.IdVenda );
+  edtIdVenda.Text:= IntToStr( Venda.IdVenda );
   cpDtVenda.Date:= Venda.DataHoraVenda;
   lcbCliente.KeyValue:= Venda.Cliente.IdCliente;
-  //edtObservacao.Text:= Venda.Status;
+  edtTotal.Text:= FloatToStr(Venda.Total);
+
+  if Venda.Status = 'P' then
+    cbxStatus.ItemIndex:= ctPendente
+  else cbxStatus.ItemIndex:= ctEfetivada;
 
   GetTotalizadores;
 end;

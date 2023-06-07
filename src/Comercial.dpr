@@ -39,13 +39,22 @@ uses
   uController.RootCliente in 'controller\uController.RootCliente.pas',
   uView.Clientes in 'view\uView.Clientes.pas' {frmCliente},
   uModel.Services.Fornecedor in 'model\services\uModel.Services.Fornecedor.pas',
-  uModel.Repository.Fornecedor in 'uModel.Repository.Fornecedor.pas',
   uController.Fornecedor in 'controller\uController.Fornecedor.pas',
   uController.DataConverter.Fornecedor in 'controller\uController.DataConverter.Fornecedor.pas',
   uController.RootFornecedor in 'controller\uController.RootFornecedor.pas',
   uView.FormConsulta.Fornecedor in 'view\Consulta\uView.FormConsulta.Fornecedor.pas' {frmConsultaFornecedor},
   uView.Fornecedor in 'view\uView.Fornecedor.pas' {frmFornecedor},
-  uView.CustomFormFilterFornecedor in 'view\Consulta\uView.CustomFormFilterFornecedor.pas';
+  uView.CustomFormFilterFornecedor in 'view\Consulta\uView.CustomFormFilterFornecedor.pas',
+  uModel.Repository.Produto in 'model\repository\uModel.Repository.Produto.pas',
+  uModel.Repository.Fornecedor in 'model\repository\uModel.Repository.Fornecedor.pas',
+  uModel.Services.Produto in 'model\services\uModel.Services.Produto.pas',
+  uController.Produto in 'controller\uController.Produto.pas',
+  uController.DataConverter.Produto in 'controller\uController.DataConverter.Produto.pas',
+  uController.RootProduto in 'controller\uController.RootProduto.pas',
+  uView.CustomFormFilterProduto in 'view\Consulta\uView.CustomFormFilterProduto.pas',
+  uView.Produto in 'view\uView.Produto.pas' {frmProduto},
+  uConntoller.FornecedorContext in 'controller\uConntoller.FornecedorContext.pas',
+  uView.FormConsulta.Produto in 'view\Consulta\uView.FormConsulta.Produto.pas' {frmConsultaProduto};
 
 {$R *.res}
 

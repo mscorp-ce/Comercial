@@ -47,7 +47,7 @@ uses
   uController.Fornecedor, uController.DataConverter.Fornecedor, uView.Fornecedor,
   uView.CustomFormFilterFornecedor;
 
-{ TfrmConsulta2 }
+{ TfrmConsultaFornecedor }
 
 procedure TfrmConsultaFornecedor.All;
 var

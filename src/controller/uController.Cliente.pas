@@ -18,7 +18,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TCliente;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: TCliente): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
     function FindAll: TObjectList<TCliente>; overload;
     function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
     function Frist: TCliente;
@@ -72,9 +72,9 @@ begin
   Result:= ClienteService.FindById(Id);
 end;
 
-function TControllerCliente.FindExists(CommadSQL: String; Entity: TCliente): Boolean;
+function TControllerCliente.FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean;
 begin
-  Result:= ClienteService.FindExists(CommadSQL, Entity);
+  Result:= ClienteService.FindExists(CommadSQL, Parameter, Entity);
 end;
 
 function TControllerCliente.FindExists: Boolean;

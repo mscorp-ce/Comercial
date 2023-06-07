@@ -44,7 +44,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>;
     function Frist: T;
     function Previous(Id: Integer): T;
@@ -63,7 +63,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
     function Frist: T;
@@ -98,7 +98,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
     function Frist: T;

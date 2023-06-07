@@ -41,7 +41,8 @@ implementation
 {$R *.dfm}
 
 uses
-  uView.FormConsulta.Cliente, uView.FormConsulta.Fornecedor, uView.FormConsulta.Venda;
+  uView.FormConsulta.Cliente, uView.FormConsulta.Fornecedor, uView.FormConsulta.Venda,
+  uView.FormConsulta.Produto;
 
 procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
 var
@@ -68,8 +69,15 @@ begin
 end;
 
 procedure TfrmPrincipal.Produto1Click(Sender: TObject);
+var
+  ConsultaProduto: TfrmConsultaProduto;
 begin
-  //
+  ConsultaProduto:= TfrmConsultaProduto.Create(Self);
+  try
+    ConsultaProduto.ShowModal;
+  finally
+    FreeAndNil(ConsultaProduto);
+  end;
 end;
 
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);

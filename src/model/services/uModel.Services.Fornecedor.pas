@@ -19,7 +19,7 @@ type
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TFornecedor;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Entity: TFornecedor): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
     function FindAll: TObjectList<TFornecedor>; overload;
     function FindAll(CommadSQL: String): TObjectList<TFornecedor>; overload;
     function Frist: TFornecedor;
@@ -35,7 +35,7 @@ implementation
 { TFornecedorService }
 
 uses
-  uModel.Repository.Fornecedor, Vcl.Dialogs, uModel.ConstsStatement;
+  Vcl.Dialogs, uModel.Repository.Fornecedor, uModel.ConstsStatement;
 
 constructor TFornecedorService.Create;
 begin
@@ -83,9 +83,9 @@ begin
   Result:= FornecedorRepository.FindById(Id);
 end;
 
-function TFornecedorService.FindExists(CommadSQL: String; Entity: TFornecedor): Boolean;
+function TFornecedorService.FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean;
 begin
-  Result:= FornecedorRepository.FindExists(CommadSQL, Entity);
+  Result:= FornecedorRepository.FindExists(CommadSQL, Parameter, Entity);
 end;
 
 function TFornecedorService.FindExists: Boolean;
@@ -139,7 +139,7 @@ begin
       Exit;
     end;
 
-  if FindExists(ctSQLClienteFindExistsCpf, Entity) then
+  if FindExists(ctSQLClienteFindExistsCpf, 'cpf', Entity) then
     begin
       MessageContext:= 'Cnpj já cadastrado.';
     end;
