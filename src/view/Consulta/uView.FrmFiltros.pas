@@ -63,6 +63,18 @@ var
   Attribute: String;
   Clause: String;
 begin
+  if cbxFields.ItemIndex < 0 then
+    begin
+      ShowMessage('Nenhum atributo foi informado para Filtar por.');
+      Exit;
+    end;
+
+  if cbxOperator.ItemIndex < 0 then
+    begin
+      ShowMessage('Nenhum atributo foi informado para o Operator.');
+      Exit;
+    end;
+
   Clause:= ' WHERE ' + Alias + '.'+  cbxFields.Text + ' ';
 
   case cbxOperator.ItemIndex of

@@ -11,12 +11,14 @@ type
   private
     VendaService: IService<TVenda>;
   public
+    function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: TVenda): Boolean;
     function Update(Id: Integer; Entity: TVenda): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TVenda;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: TVenda): Boolean; overload;
     function FindAll: TObjectList<TVenda>; overload;
     function FindAll(CommadSQL: String): TObjectList<TVenda>; overload;
     function Frist: TVenda;
@@ -68,6 +70,11 @@ begin
   Result:= VendaService.FindById(Id);
 end;
 
+function TControllerVenda.FindExists(CommadSQL: String; Entity: TVenda): Boolean;
+begin
+  Result:= False;
+end;
+
 function TControllerVenda.FindExists: Boolean;
 begin
   Result:= False;
@@ -76,6 +83,11 @@ end;
 function TControllerVenda.Frist: TVenda;
 begin
   Result:= VendaService.Frist;
+end;
+
+function TControllerVenda.GeneratedValue: Integer;
+begin
+  Result:= 0;
 end;
 
 function TControllerVenda.Last: TVenda;

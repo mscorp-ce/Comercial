@@ -37,12 +37,14 @@ type
 
   IController<T: class> = interface(IRootController<T>)
   ['{7E854F73-17F8-4AE0-B6E6-82155679452E}']
+    function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: T): Boolean;
     function Update(Id: Integer; Entity: T): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>;
     function Frist: T;
     function Previous(Id: Integer): T;
@@ -55,12 +57,13 @@ type
     function Fields: TStrings;
     function GeneratedValue: Integer;
     function CurrentGeneratedValue: Integer;
-    function IsValid(Entity: T): Boolean;
+    function IsValid(Entity: T; out MessageContext: String): Boolean;
     function Save(Entity: T): Boolean;
     function Update(Id: Integer; Entity: T): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
     function Frist: T;
@@ -94,7 +97,8 @@ type
     function Update(Entity: T): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): T;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: T): Boolean; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
     function Frist: T;

@@ -40,14 +40,31 @@ implementation
 
 {$R *.dfm}
 
+uses
+  uView.FormConsulta.Cliente, uView.FormConsulta.Fornecedor, uView.FormConsulta.Venda;
+
 procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
+var
+  ConsultaCliente: TfrmConsultaCliente;
 begin
-  //
+  ConsultaCliente:= TfrmConsultaCliente.Create(Self);
+  try
+    ConsultaCliente.ShowModal;
+  finally
+    FreeAndNil(ConsultaCliente);
+  end;
 end;
 
 procedure TfrmPrincipal.Fornecedores1Click(Sender: TObject);
+var
+  ConsultaFornecedor: TfrmConsultaFornecedor;
 begin
-  //
+  ConsultaFornecedor:= TfrmConsultaFornecedor.Create(Self);
+  try
+    ConsultaFornecedor.ShowModal;
+  finally
+    FreeAndNil(ConsultaFornecedor);
+  end;
 end;
 
 procedure TfrmPrincipal.Produto1Click(Sender: TObject);
@@ -56,8 +73,15 @@ begin
 end;
 
 procedure TfrmPrincipal.Vendas1Click(Sender: TObject);
+var
+  ConsultaVenda: TfrmConsultaVenda;
 begin
-  //
+  ConsultaVenda:= TfrmConsultaVenda.Create(Self);
+  try
+    ConsultaVenda.ShowModal;
+  finally
+    FreeAndNil(ConsultaVenda);
+  end;
 end;
 
 end.

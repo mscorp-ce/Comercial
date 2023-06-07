@@ -20,7 +20,8 @@ type
     function Update(Entity: TVenda): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TVenda;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: TVenda): Boolean; overload;
     function FindAll: TObjectList<TVenda>; overload;
     function FindAll(CommadSQL: String): TObjectList<TVenda>;overload;
     function Frist: TVenda;
@@ -203,6 +204,11 @@ begin
         raise Exception.Create(TFireDACEngineException.GetMessage(E));
       end;
   end;
+end;
+
+function TVendaRepository.FindExists(CommadSQL: String; Entity: TVenda): Boolean;
+begin
+  Result:= False;
 end;
 
 function TVendaRepository.FindExists: Boolean;

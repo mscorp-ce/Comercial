@@ -50,7 +50,7 @@ implementation
 
 uses
   System.UITypes, uView.CustomFormFilterVenda, uController.RootVenda, uController.DataConverter.Venda,
-  uModel.ConstsStatement, uController.Venda, uView.Sales;
+  uModel.ConstsStatement, uController.Venda, uView.Vendas;
 
 { TfrmConsulta2 }
 
@@ -119,14 +119,14 @@ end;
 
 procedure TfrmConsultaVenda.Filter;
 var
-  CustomFormFilter: TCustomFormFilterVenda<TVenda>;
+  CustomFormFilter: TCustomFormFilterVenda;
   List: TObjectList<TVenda>;
 
   SQL: String;
 begin
   inherited;
 
-  CustomFormFilter:= TCustomFormFilterVenda<TVenda>.Create;
+  CustomFormFilter:= TCustomFormFilterVenda.Create;
   try
     CustomFormFilter.ShowModal;
     SQL:= ctSQLVendas;
@@ -140,7 +140,7 @@ begin
 
     Search(SQL, List);
 
-    ShowMessage(SQL);
+    //ShowMessage(SQL);
   finally
     FreeAndNil(CustomFormFilter);
     FreeAndNil(List);
@@ -202,8 +202,8 @@ var
   DataConverter: IDataConverter<TVenda>;
 begin
   ControllerRootVenda:= TControllerRootVenda.Create;
-    cdsConsulta.Close;
-    cdsConsulta.CreateDataSet;
+  cdsConsulta.Close;
+  cdsConsulta.CreateDataSet;
 
   Vendas:= ControllerRootVenda.FindAll(CommandSQL);
 

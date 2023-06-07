@@ -27,7 +27,6 @@ type
     dsVendas: TDataSource;
     Panel1: TPanel;
     DBGrid1: TDBGrid;
-    procedure edtDescontoChange(Sender: TObject);
   protected
     procedure DoShow; override;
   private
@@ -36,7 +35,6 @@ type
     Venda: TVenda;
     FId: Integer;
     procedure SQLClientes;
-    procedure SQLVendedores;
     procedure GetTotalizadores;
     procedure SetId(const Value: Integer);
   protected
@@ -67,9 +65,8 @@ implementation
 {$R *.dfm}
 
 uses
-  System.Generics.Collections, uModel.Entities.Cliente, uModel.Entities.Vendedor,
-  uControllerRoot.Cliente, uModel.ConstsStatement, uController.DataConverter.Cliente,
-  uController.RootVendedor, uController.DataConverter.Vendedor, uController.Venda;
+  System.Generics.Collections, uModel.Entities.Cliente, uController.RootCliente,
+  uModel.ConstsStatement, uController.DataConverter.Cliente, uController.Venda;
 
 procedure TfrmVenda.Save;
 begin
@@ -107,13 +104,8 @@ end;
 procedure TfrmVenda.SetProperty;
 begin
   inherited;
-  Venda.DtVenda:= cpDtVenda.Date;
+  Venda.DataHoraVenda:= cpDtVenda.Date;
   Venda.Cliente.IdCliente:= lcbCliente.KeyValue;
-  Venda.Vendedor.IdVendedor:= lcbVendedor.KeyValue;
-  Venda.Observacao:= edtObservacao.Text;
-  Venda.ObservacaoEntrega:= mmObservacaoEntrega.Text;
-  Venda.Subtotal:= StrToFloatDef(edtSubtotal.Text, 0);
-  Venda.Desconto:= StrToFloatDef(edtDesconto.Text, 0);
   Venda.Total:= StrToFloatDef(edtTotal.Text, 0);
 end;
 
@@ -140,28 +132,6 @@ begin
   end;
 end;
 
-procedure TfrmVenda.SQLVendedores;
-var
-  ControllerRootVendedor: IRootController<TVendedor>;
-  DataConverter: IDataConverter<TVendedor>;
-  Vendedores: TObjectList<TVendedor>;
-begin
-  ControllerRootVendedor:= TControllerRootVendedor.Create;
-  cdsVendedores.Close;
-  cdsVendedores.CreateDataSet;
-
-  try
-    Vendedores:= ControllerRootVendedor.FindAll(ctSQLVendedores);
-
-    DataConverter:= TDataConverterVendedor.Create;
-    DataConverter.Populate(Vendedores, cdsVendedores);
-
-    cdsVendedores.Open;
-  finally
-    FreeAndNil(Vendedores);
-  end;
-end;
-
 procedure TfrmVenda.AddFocus;
 begin
   inherited;
@@ -170,8 +140,7 @@ end;
 
 procedure TfrmVenda.GetTotalizadores;
 begin
-  edtSubtotal.Text:= 'R$ ' + FormatFloat('###,###,##0.00', Venda.Subtotal);
-  edtDesconto.Text:= 'R$ ' + FormatFloat('###,###,##0.00', Venda.Desconto);
+  edtTotal.Text:= 'R$ ' + FormatFloat('###,###,##0.00', Venda.Total);
 end;
 
 procedure TfrmVenda.Last;
@@ -260,21 +229,9 @@ begin
 
   AddFocus;
   SQLClientes;
-  SQLVendedores;
 
   Venda:= ControllerVenda.FindById(id);
   GetProperty;
-end;
-
-procedure TfrmVenda.edtDescontoChange(Sender: TObject);
-var
-  Subtotal, Desconto: Double;
-begin
-  inherited;
-  Subtotal:= StrToFloatDef( edtSubtotal.Text, 0 );
-  Desconto:= StrToFloatDef( edtDesconto.Text, 0 );
-
-  edtTotal.Text:= 'R$ ' + FormatFloat('###,###,##0.00', Subtotal - Desconto);
 end;
 
 procedure TfrmVenda.Frist;
@@ -292,11 +249,9 @@ procedure TfrmVenda.GetProperty;
 begin
   inherited;
   edtVenda.Text:= IntToStr( Venda.IdVenda );
-  cpDtVenda.Date:= Venda.DtVenda;
+  cpDtVenda.Date:= Venda.DataHoraVenda;
   lcbCliente.KeyValue:= Venda.Cliente.IdCliente;
-  lcbVendedor.KeyValue:= Venda.Vendedor.IdVendedor;
-  edtObservacao.Text:= Venda.Observacao;
-  mmObservacaoEntrega.Text:= Venda.ObservacaoEntrega;
+  //edtObservacao.Text:= Venda.Status;
 
   GetTotalizadores;
 end;

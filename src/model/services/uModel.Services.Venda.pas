@@ -14,13 +14,14 @@ type
     function Fields: TStrings;
     function GeneratedValue: Integer;
     function CurrentGeneratedValue: Integer;
-    function IsValid(Entity: TVenda): Boolean;
+    function IsValid(Entity: TVenda; out MessageContext: String): Boolean;
     function Save(Entity: TVenda): Boolean;
     procedure AfterSave(Entity: TVenda);
     function Update(Id: Integer; Entity: TVenda): Boolean;
     function DeleteById(Id: Integer): Boolean;
     function FindById(Id: Integer): TVenda;
-    function FindExists: Boolean;
+    function FindExists: Boolean; overload;
+    function FindExists(CommadSQL: String; Entity: TVenda): Boolean; overload;
     function FindAll: TObjectList<TVenda>; overload;
     function FindAll(CommadSQL: String): TObjectList<TVenda>; overload;
     function Frist: TVenda;
@@ -87,6 +88,11 @@ begin
   Result:= VendaRepository.FindById(Id);
 end;
 
+function TVendaService.FindExists(CommadSQL: String; Entity: TVenda): Boolean;
+begin
+  Result:= False;
+end;
+
 function TVendaService.FindExists: Boolean;
 begin
   Result:= False;
@@ -102,7 +108,7 @@ begin
   Result:= VendaRepository.GeneratedValue;
 end;
 
-function TVendaService.IsValid(Entity: TVenda): Boolean;
+function TVendaService.IsValid(Entity: TVenda; out MessageContext: String): Boolean;
 begin
   Result:= False;
 

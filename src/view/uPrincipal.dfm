@@ -2,7 +2,7 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   Caption = 'Sistema Comercial'
-  ClientHeight = 484
+  ClientHeight = 384
   ClientWidth = 1036
   Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
@@ -19,17 +19,13 @@ object frmPrincipal: TfrmPrincipal
     Left = 0
     Top = 0
     Width = 1036
-    Height = 484
+    Height = 384
     Align = alClient
     BevelOuter = bvLowered
     Color = clSkyBlue
     ParentBackground = False
     TabOrder = 0
     StyleElements = [seFont, seBorder]
-    ExplicitLeft = -826
-    ExplicitTop = -289
-    ExplicitWidth = 1273
-    ExplicitHeight = 490
   end
   object mmMenu: TMainMenu
     Left = 496

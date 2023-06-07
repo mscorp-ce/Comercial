@@ -2,6 +2,8 @@ program Comercial;
 
 uses
   Vcl.Forms,
+  Vcl.Themes,
+  Vcl.Styles,
   uPrincipal in 'view\uPrincipal.pas' {frmPrincipal},
   uLibary in 'uLibary.pas',
   uModel.Entities.Cliente in 'model\entities\uModel.Entities.Cliente.pas',
@@ -18,14 +20,32 @@ uses
   uModel.Repository.Statement in 'model\repository\uModel.Repository.Statement.pas',
   uModel.Repository.StatementFactory in 'model\repository\uModel.Repository.StatementFactory.pas',
   uModel.Repository.Venda in 'model\repository\uModel.Repository.Venda.pas',
-  Vcl.Themes,
-  Vcl.Styles,
-  uView.FormConsulta in 'view\Consulta\uView.FormConsulta.pas' {frmConsulta},
-  uView.FormConsulta.Venda in 'view\Consulta\uView.FormConsulta.Venda.pas' {frmConsultaVenda},
   uController.DataConverter.Venda in 'controller\uController.DataConverter.Venda.pas',
   uController.Venda in 'controller\uController.Venda.pas',
   uModel.Services.Venda in 'model\services\uModel.Services.Venda.pas',
-  uController.RootVenda in 'controller\uController.RootVenda.pas';
+  uController.RootVenda in 'controller\uController.RootVenda.pas',
+  uView.CustomFormFilterVenda in 'view\Consulta\uView.CustomFormFilterVenda.pas',
+  uView.BaseRegistrationForm in 'view\FormCadastro\uView.BaseRegistrationForm.pas' {frmBaseRegistration},
+  uView.Vendas in 'view\uView.Vendas.pas' {frmVenda},
+  uModel.Repository.Cliente in 'model\repository\uModel.Repository.Cliente.pas',
+  uView.FormConsulta in 'view\Consulta\uView.FormConsulta.pas' {frmConsulta},
+  uView.FrmFiltros in 'view\Consulta\uView.FrmFiltros.pas' {frmFiltros},
+  uView.FormConsulta.Venda in 'view\Consulta\uView.FormConsulta.Venda.pas' {frmConsultaVenda},
+  uView.FormConsulta.Cliente in 'view\Consulta\uView.FormConsulta.Cliente.pas' {frmConsultaCliente},
+  uController.Cliente in 'controller\uController.Cliente.pas',
+  uModel.Services.Cliente in 'model\services\uModel.Services.Cliente.pas',
+  uController.DataConverter.Cliente in 'controller\uController.DataConverter.Cliente.pas',
+  uView.CustomFormFilterCliente in 'view\Consulta\uView.CustomFormFilterCliente.pas',
+  uController.RootCliente in 'controller\uController.RootCliente.pas',
+  uView.Clientes in 'view\uView.Clientes.pas' {frmCliente},
+  uModel.Services.Fornecedor in 'model\services\uModel.Services.Fornecedor.pas',
+  uModel.Repository.Fornecedor in 'uModel.Repository.Fornecedor.pas',
+  uController.Fornecedor in 'controller\uController.Fornecedor.pas',
+  uController.DataConverter.Fornecedor in 'controller\uController.DataConverter.Fornecedor.pas',
+  uController.RootFornecedor in 'controller\uController.RootFornecedor.pas',
+  uView.FormConsulta.Fornecedor in 'view\Consulta\uView.FormConsulta.Fornecedor.pas' {frmConsultaFornecedor},
+  uView.Fornecedor in 'view\uView.Fornecedor.pas' {frmFornecedor},
+  uView.CustomFormFilterFornecedor in 'view\Consulta\uView.CustomFormFilterFornecedor.pas';
 
 {$R *.res}
 

@@ -7,9 +7,44 @@ const
 
   ctSQLCurrentGeneratedValue = 'SELECT COALESCE(@@IDENTITY, 0) AS currentID';
 
-  ctSQLClientes = 'SELECT idcliente, nome, cpf, status FROM Clientes';
+  ctNextValueClientes = 'SELECT NEXT VALUE FOR SEQ_CLIENTES AS currentID';
 
-  ctSQLFornecedores = 'SELECT idfornecedor, nome_fantasia, razao_social, cnpj, status FROM Fornecedores';
+  ctSQLClientes = 'SELECT cli.idcliente, cli.nome, cli.cpf, cli.data_de_nascimento, cli.status FROM Clientes cli';
+
+  ctSQLClienteDeleteByID = 'DELETE FROM Clientes WHERE idcliente = :idcliente';
+
+  ctSQLClienteWhere = ' WHERE cli.idcliente = :idcliente';
+
+  ctSQLClienteInsert = 'INSERT INTO Clientes(idcliente, nome, cpf, data_de_nascimento, status)' +
+                       ' VALUES(:idcliente, :nome, :cpf, :data_de_nascimento, :status)';
+
+  ctSQLClienteUpdate = 'UPDATE Clientes' +
+                       '   SET nome = :nome, cpf = :cpf, data_de_nascimento = :data_de_nascimento, status = :status'+
+                       ' WHERE idcliente = :idcliente';
+
+  ctSQLClienteFindID =  ctSQLClientes + ctSQLClienteWhere;
+
+  ctSQLClienteFindExistsCpf = 'SELECT COUNT(*) OCORRENCIA FROM Clientes WHERE cpf = :cpf';
+
+  ctSQLFornecedorFindExistsCnpj = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE cnpj = :cnpj';
+
+  ctSQLFornecedores = 'SELECT frn.idfornecedor, frn.nome_fantasia, frn.razao_social, frn.cnpj, frn.status FROM Fornecedores frn';
+
+  ctSQLFornecedorWhere = ' WHERE frn.idfornecedor = :idfornecedor';
+
+  ctSQLFornecedorFindID = ctSQLFornecedores + ctSQLFornecedorWhere;
+
+  ctNextValueFornecedores = 'SELECT NEXT VALUE FOR SEQ_FORNECEDORES AS currentID';
+
+  ctSQLFornecedorInsert = 'INSERT INTO Fornecedores(idfornecedor, nome_fantasia, razao_social, cnpj, status)'+
+                          ' VALUES(:idfornecedor, :nome_fantasia, :razao_social, :cnpj, :status)';
+
+  ctSQLFornecedorUpdate = 'UPDATE Fornecedores' +
+                          '   SET nome_fantasia = :nome_fantasia, razao_social = :razao_social, cnpj = :cnpj, status = :status' +
+                          ' WHERE idfornecedor = :idfornecedor';
+
+  ctSQLFornecedorDeleteByID = 'DELETE FROM Fornecedores WHERE idfornecedor = :idfornecedor';
+
 
   ctSQLVendas = 'SELECT ven.idvenda, ven.dthr_venda, ven.idcliente, cli.nome AS nome_cliente, '+
                 '   ven.total, ven.status'+
@@ -20,7 +55,6 @@ const
 
   ctSQLVendaInsert = 'INSERT INTO vendas(idvenda, dthr_venda, idcliente, total, status)' +
                      ' VALUES(:idvenda, :dthr_venda, :idcliente, :total, :status)';
-
 
   ctSQLVendaUpdate = 'UPDATE vendas ' +
                    '   SET dthr_venda = :dthr_venda, idcliente = :idcliente, total = :total, status = status '+

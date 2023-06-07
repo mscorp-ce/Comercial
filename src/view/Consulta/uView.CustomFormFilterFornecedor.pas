@@ -1,15 +1,14 @@
-unit uView.CustomFormFilterVenda;
+unit uView.CustomFormFilterFornecedor;
 
 interface
 
 uses
   System.Classes, uView.FrmFiltros, System.Generics.Collections, uModel.Abstraction,
-  uController.RootVenda, uModel.Entities.Venda;
-
+  uController.RootFornecedor, uModel.Entities.Fornecedor;
 type
-  TCustomFormFilterVenda = class(TfrmFiltros)
+  TCustomFormFilterFornecedor = class(TfrmFiltros)
   private
-    ControllerRootVenda: IRootController<TVenda>;
+    ControllerRootFornecedor: IRootController<TFornecedor>;
   protected
     { Protected declarations }
     procedure DoShow; override;
@@ -22,23 +21,23 @@ implementation
 uses
   System.SysUtils;
 
-{ TCustomFormFilter<T> }
+{ TCustomFormFilterFornecedor }
 
-constructor TCustomFormFilterVenda.Create;
+constructor TCustomFormFilterFornecedor.Create;
 begin
   inherited Create(nil);
 
-  ControllerRootVenda:= TControllerRootVenda.Create;
+  ControllerRootFornecedor:= TControllerRootFornecedor.Create;
 end;
 
-procedure TCustomFormFilterVenda.DoShow;
+procedure TCustomFormFilterFornecedor.DoShow;
 var
   Items: TStrings;
 begin
   inherited;
 
   try
-    Items:= ControllerRootVenda.Fields;
+    Items:= ControllerRootFornecedor.Fields;
 
     Self.cbxFields.Items.AddStrings( Items );
 

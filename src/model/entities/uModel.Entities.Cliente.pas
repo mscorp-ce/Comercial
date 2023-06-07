@@ -8,12 +8,12 @@ type
     FIdCliente: Integer;
     FNome: String;
     FCpf: String;
-    FDtNascimento: TDateTime;
+    FDtNascimento: TDate;
     FStatus: String;
     procedure SetIdCliente(const Value: Integer);
     procedure SetNome(const Value: String);
     procedure SetCpf(const Value: String);
-    procedure SetDtNascimento(const Value: TDateTime);
+    procedure SetDtNascimento(const Value: TDate);
     procedure SetStatus(const Value: String);
   public
     function IsCPF(Value: String): Boolean;
@@ -22,7 +22,7 @@ type
     property Nome: String read FNome write SetNome;
     property Cpf: String read FCpf write SetCpf;
     property Status: String read FStatus write SetStatus;
-    property DtNascimento: TDateTime read FDtNascimento write SetDtNascimento;
+    property DtNascimento: TDate read FDtNascimento write SetDtNascimento;
   end;
 
 implementation
@@ -37,7 +37,7 @@ begin
   FCpf := Value;
 end;
 
-procedure TCliente.SetDtNascimento(const Value: TDateTime);
+procedure TCliente.SetDtNascimento(const Value: TDate);
 begin
   FDtNascimento := Value;
 end;
