@@ -35,7 +35,7 @@ implementation
 { TClienteService }
 
 uses
-  uModel.Repository.Cliente, Vcl.Dialogs, uModel.ConstsStatement;
+  System.SysUtils, uModel.Repository.Cliente, Vcl.Dialogs, uModel.ConstsStatement;
 
 constructor TClienteService.Create;
 begin
@@ -108,6 +108,36 @@ var
   fIsValid: Boolean;
 begin
   Result:= False;
+
+  if Entity.IdCliente = 0 then
+    begin
+      MessageContext:= 'IdCliente não informado.';
+      Exit;
+    end;
+
+  if Length( Entity.Nome ) = 0 then
+    begin
+      MessageContext:= 'Nome não informado.';
+      Exit;
+    end;
+
+  if Length( Entity.Cpf ) = 0 then
+    begin
+      MessageContext:= 'Cpf não informado.';
+      Exit;
+    end;
+
+  if DateToStr(Entity.DtNascimento) = '00/00/0000' then
+    begin
+      MessageContext:= 'Data de Nascimento não informada.';
+      Exit;
+    end;
+
+  if Length( Entity.Status ) = 0 then
+    begin
+      MessageContext:= 'Status não informado.';
+      Exit;
+    end;
 
   if FindExists(ctSQLClienteFindExistsCpf, Entity) then
     begin

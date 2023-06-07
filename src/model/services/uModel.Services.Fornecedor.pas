@@ -109,6 +109,36 @@ var
 begin
   Result:= False;
 
+  if Entity.IdFornecedor = 0 then
+    begin
+      MessageContext:= 'IdFornecedor não informado.';
+      Exit;
+    end;
+
+  if Length( Entity.NomeFantasia ) = 0 then
+    begin
+      MessageContext:= 'Nome Fantasia não informado.';
+      Exit;
+    end;
+
+  if Length( Entity.RazaoSocial ) = 0 then
+    begin
+      MessageContext:= 'Razão Social não informada.';
+      Exit;
+    end;
+
+  if Length( Entity.Cnpj ) = 0 then
+    begin
+      MessageContext:= 'Cpf não informado.';
+      Exit;
+    end;
+
+  if Length( Entity.Status ) = 0 then
+    begin
+      MessageContext:= 'Status não informado.';
+      Exit;
+    end;
+
   if FindExists(ctSQLClienteFindExistsCpf, Entity) then
     begin
       MessageContext:= 'Cnpj já cadastrado.';
