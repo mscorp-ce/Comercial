@@ -45,7 +45,7 @@ implementation
 uses
   System.UITypes, uModel.ConstsStatement, uController.RootFornecedor,
   uController.Fornecedor, uController.DataConverter.Fornecedor, uView.Fornecedor,
-  uView.CustomFormFilterFornecedor;
+  uView.CustomFormFilterFornecedor, uConntoller.FornecedorContext;
 
 { TfrmConsultaFornecedor }
 
@@ -87,6 +87,8 @@ end;
 procedure TfrmConsultaFornecedor.Delete;
 const
   Msg = 'Deseja realmente exluir o registro selecionado?';
+var
+  Fornecedor: TFornecedor;
 begin
   inherited;
 
@@ -98,11 +100,17 @@ begin
 
   if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
-      if ControllerFornecedor.DeleteById(cdsConsulta.FieldByName('idFornecedor').AsInteger) then
-        begin
-          ShowMessage('Registro deletado com sucesso.');
-          All;
-        end;
+      Fornecedor:= TFornecedor.Create;
+      try
+        Fornecedor.IdFornecedor:= cdsConsulta.FieldByName('idFornecedor').AsInteger;
+        if ControllerFornecedor.DeleteById(Fornecedor) then
+          begin
+            ShowMessage('Registro deletado com sucesso.');
+            All;
+          end;
+      finally
+        FreeAndNil(Fornecedor);
+      end;
     end;
 end;
 
@@ -174,6 +182,18 @@ end;
 
 procedure TfrmConsultaFornecedor.Search(var CommandSQL: String; var Fornecedores: TObjectList<TFornecedor>);
 var
+  FornecedorContext: TFornecedorContext;
+begin
+  inherited;
+  try
+    FornecedorContext:= TFornecedorContext.Create;
+
+    FornecedorContext.List(Fornecedores, cdsConsulta);
+  finally
+    FreeAndNil(FornecedorContext);
+  end;
+
+{var
   ControllerRootFornecedor: IRootController<TFornecedor>;
   DataConverter: IDataConverter<TFornecedor>;
 begin
@@ -187,7 +207,7 @@ begin
   DataConverter:= TDataConverterFornecedor.Create;
   DataConverter.Populate(Fornecedores, cdsConsulta);
 
-  cdsConsulta.Open;
+  cdsConsulta.Open;}
 end;
 
 end.

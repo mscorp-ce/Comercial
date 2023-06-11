@@ -3,6 +3,7 @@ __recovery/
 *.exe
 *.map
 *.dcu
+*.drc
 *.stat
 *.local
 *.identcache

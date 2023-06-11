@@ -71,12 +71,21 @@ implementation
 uses
   System.Generics.Collections, uController.RootFornecedor, uModel.ConstsStatement,
   uController.DataConverter.Fornecedor, uController.Produto, uModel.Entities.Fornecedor,
-  uConntoller.FornecedorContext;
+  uConntoller.FornecedorContext, uController.Format;
 
 procedure TfrmProduto.Save;
 begin
   inherited;
+  //tratameno para não da erro de EVariantTypeCastError variant of type (Null) into type (Integer)'.
+  if lcbFornecedor.KeyValue = Null then
+    begin
+      ShowMessage('Informe um Fornecedor valido.');
+      spbRestaurarClick(Self);
+      Exit;
+    end;
+
   SetProperty;
+
   case State of
     dsInsert:
       begin
@@ -90,7 +99,7 @@ begin
 
     dsEdit:
       begin
-        if ControllerProduto.Update(fId, Produto) then
+        if ControllerProduto.Update(Produto) then
           begin
             State:= dsBrowse;
             AfterSave;
@@ -112,7 +121,7 @@ begin
   Produto.IdProduto:= StrToIntDef(edtIdProduto.Text, 0);
   Produto.Descricao:= edtDescricao.Text;
   Produto.Fornecedor.IdFornecedor:= lcbFornecedor.KeyValue;
-  Produto.PrecoUnitario:= StrToFloatDef( StringReplace(edtPrecoUnitario.Text, '.', '', [rfReplaceAll]),  0);
+  Produto.PrecoUnitario:= TFormat.Execute(edtPrecoUnitario.Text);
 
   case cbxStatus.ItemIndex of
     ctAtivo: Produto.Status:= 'A';
@@ -233,8 +242,6 @@ begin
 
     AddFocus;
     //SQLClientes;
-
-
 
     if id > 0 then
       begin

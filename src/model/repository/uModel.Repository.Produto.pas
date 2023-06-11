@@ -3,7 +3,8 @@ unit uModel.Repository.Produto;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Produto;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Produto,
+  Data.DB;
 
 type
   TProdutoRepository = class(TInterfacedObject, IRepository<TProduto>)
@@ -15,13 +16,15 @@ type
     function CurrentGeneratedValue: Integer;
     function Save(Entity: TProduto): Boolean;
     procedure AfterSave(Entity: TProduto);
-    function Update(Entity: TProduto): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TProduto): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function DeleteById(Entity: TProduto): Boolean;
     function FindById(Id: Integer): TProduto;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TProduto>; overload;
-    function FindAll(CommadSQL: String): TObjectList<TProduto>;overload;
+    function FindAll(CommadSQL: String): TObjectList<TProduto>; overload;
+    function FindAll(CommadSQL: String; Entity: TProduto): TObjectList<TProduto>; overload;
     function Frist: TProduto;
     function Previous(Id: Integer): TProduto;
     function Next(Id: Integer): TProduto;
@@ -37,7 +40,8 @@ implementation
 uses
   System.SysUtils, FireDAC.Stan.Error, uModel.Repository.StatementFactory,
   uModel.DataManagerFactory, uModel.Repository.DataManager,
-  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement;
+  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement,
+  uModel.Repository.RepositoryContext;
 
 procedure TProdutoRepository.AfterSave(Entity: TProduto);
 begin
@@ -49,7 +53,7 @@ begin
   Result:= 0;
 end;
 
-function TProdutoRepository.DeleteById(Id: Integer): Boolean;
+function TProdutoRepository.DeleteById(Entity: TProduto): Boolean;
 var
   Statement: IStatement;
 begin
@@ -57,7 +61,7 @@ begin
     Statement:= TStatementFactory.GetStatement(DataManager);
 
     Statement.Query.SQL.Add(ctSQLProdutoDeleteByID);
-    Statement.Query.Params.ParamByName('idProduto').AsInteger:= Id;
+    Statement.Query.Params.ParamByName('idProduto').AsInteger:= Entity.IdProduto;
     Statement.Query.ExecSQL;
 
     Result:=  Statement.Query.RowsAffected = ctRowsAffected;
@@ -187,24 +191,15 @@ begin
   end;
 end;
 
-function TProdutoRepository.FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean;
+function TProdutoRepository.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 var
-  Statement: IStatement;
+  RepositoryContext: TRepositoryContext;
 begin
+  RepositoryContext:= TRepositoryContext.Create;
   try
-    Statement:= TStatementFactory.GetStatement(DataManager);
-
-    Statement.Query.SQL.Add(CommadSQL); //Cricar ServiceProduto
-    Statement.Query.Params.ParamByName(Parameter).AsInteger:= Entity.Fornecedor.IdFornecedor;
-    Statement.Query.Open;
-
-    Result:= Statement.Query.FieldByName('OCORRENCIA').AsInteger = ctRowsAffected;
-
-  except
-    on E: EFDDBEngineException do
-      begin
-        raise Exception.Create(TFireDACEngineException.GetMessage(E));
-      end;
+    Result:= RepositoryContext.FindExists(CommadSQL, Parameter, ParameterType, Value);
+  finally
+    FreeAndNil(RepositoryContext);
   end;
 end;
 
@@ -310,6 +305,12 @@ begin
   end;
 end;
 
+function TProdutoRepository.Update(CommandSQL, Parameter: String;
+  Entity: TProduto): Boolean;
+begin
+  Result:= False;
+end;
+
 function TProdutoRepository.Update(Entity: TProduto): Boolean;
 var
   Statement: IStatement;
@@ -332,6 +333,12 @@ begin
         raise Exception.Create(TFireDACEngineException.GetMessage(E));
       end;
   end;
+end;
+
+function TProdutoRepository.FindAll(CommadSQL: String;
+  Entity: TProduto): TObjectList<TProduto>;
+begin
+  Result:= nil;
 end;
 
 end.

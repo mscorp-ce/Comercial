@@ -3,7 +3,8 @@ unit uModel.Services.Produto;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Produto;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Produto,
+  Data.DB;
 
 type
   TProdutoService = class(TInterfacedObject, IService<TProduto>)
@@ -15,13 +16,15 @@ type
     function CurrentGeneratedValue: Integer;
     function IsValid(Entity: TProduto; out MessageContext: String): Boolean;
     function Save(Entity: TProduto): Boolean;
-    function Update(Id: Integer; Entity: TProduto): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TProduto): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function DeleteById(Entity: TProduto): Boolean;
     function FindById(Id: Integer): TProduto;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TProduto>; overload;
     function FindAll(CommadSQL: String): TObjectList<TProduto>; overload;
+    function FindAll(CommadSQL: String; Entity: TProduto): TObjectList<TProduto>; overload;
     function Frist: TProduto;
     function Previous(Id: Integer): TProduto;
     function Next(Id: Integer): TProduto;
@@ -49,9 +52,9 @@ begin
   Result:= 0;
 end;
 
-function TProdutoService.DeleteById(Id: Integer): Boolean;
+function TProdutoService.DeleteById(Entity: TProduto): Boolean;
 begin
-  Result:= ProdutoRepository.DeleteById(Id);
+  Result:= ProdutoRepository.DeleteById(Entity);
 end;
 
 destructor TProdutoService.Destroy;
@@ -78,14 +81,20 @@ begin
   Result:= ProdutoRepository.FindAll(CommadSQL);
 end;
 
+function TProdutoService.FindAll(CommadSQL: String;
+  Entity: TProduto): TObjectList<TProduto>;
+begin
+  Result:= nil;
+end;
+
 function TProdutoService.FindById(Id: Integer): TProduto;
 begin
   Result:= ProdutoRepository.FindById(Id);
 end;
 
-function TProdutoService.FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean;
+function TProdutoService.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= ProdutoRepository.FindExists(CommadSQL, Parameter, Entity);
+  Result:= ProdutoRepository.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TProdutoService.FindExists: Boolean;
@@ -104,6 +113,8 @@ begin
 end;
 
 function TProdutoService.IsValid(Entity: TProduto; out MessageContext: String): Boolean;
+var
+  Statement: IStatement;
 begin
   Result:= False;
 
@@ -125,13 +136,17 @@ begin
       Exit;
     end;
 
-  if not FindExists(ctSQLFornecedorFindExistsIdFornecedor, 'idfornecedor', Entity) then
+  Statement:= FindExists(ctSQLFornecedorFindExistsIdFornecedor, 'idfornecedor', ftInteger, Entity.Fornecedor.IdFornecedor);
+
+  if Statement.Query.FieldByName('idfornecedor').AsInteger = 0 then
     begin
       MessageContext:= 'Esse fornecedor não esta cadastrado.';
       Exit;
     end;
 
-  if FindExists(ctSQLFornecedorFindExistsInativo, 'idfornecedor', Entity) then
+  Statement:= FindExists(ctSQLFornecedorFindExistsInativo, 'idfornecedor', ftInteger, Entity.Fornecedor.IdFornecedor);
+
+  if Statement.Query.FieldByName('status').AsString = 'I' then
     begin
       MessageContext:= 'O fornecedor esta inativo.';
       Exit;
@@ -182,7 +197,13 @@ begin
   //Result:= Return;
 end;
 
-function TProdutoService.Update(Id: Integer; Entity: TProduto): Boolean;
+function TProdutoService.Update(CommandSQL, Parameter: String;
+  Entity: TProduto): Boolean;
+begin
+  Result:= False;
+end;
+
+function TProdutoService.Update(Entity: TProduto): Boolean;
 var
   MessageContext: String;
 begin

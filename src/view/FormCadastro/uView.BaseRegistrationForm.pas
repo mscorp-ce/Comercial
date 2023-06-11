@@ -39,6 +39,7 @@ type
     procedure Next; virtual; abstract;
     procedure Last; virtual; abstract;
     procedure Restaurar; virtual; abstract;
+    procedure DoShow; override;
   public
     { Public declarations }
   end;
@@ -49,6 +50,11 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrmBaseRegistration.DoShow;
+begin
+  inherited;
+end;
 
 procedure TfrmBaseRegistration.FormKeyPress(Sender: TObject; var Key: Char);
 const

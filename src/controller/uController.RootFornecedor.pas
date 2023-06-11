@@ -11,7 +11,8 @@ type
     FornecedorService: IService<TFornecedor>;
   public
     function Fields: TStrings;
-    function FindAll(CommadSQL: String): TObjectList<TFornecedor>;
+    function FindAll(CommadSQL: String): TObjectList<TFornecedor>; overload;
+    function FindAll(CommadSQL: String; Entity: TFornecedor): TObjectList<TFornecedor>; overload;
 
     constructor Create; reintroduce;
     destructor Destroy; override;
@@ -42,6 +43,12 @@ begin
   Items:= FornecedorService.Fields;
 
   Result:= Items;
+end;
+
+function TControllerRootFornecedor.FindAll(CommadSQL: String;
+  Entity: TFornecedor): TObjectList<TFornecedor>;
+begin
+  Result:= nil;
 end;
 
 function TControllerRootFornecedor.FindAll(CommadSQL: String): TObjectList<TFornecedor>;

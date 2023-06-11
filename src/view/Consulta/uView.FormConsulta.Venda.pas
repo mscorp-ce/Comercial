@@ -11,22 +11,18 @@ uses
 type
   TfrmConsultaVenda = class(TfrmConsulta)
     cdsConsultaidvenda: TIntegerField;
-    cdsConsultadtvenda: TDateField;
-    cdsConsultacliente: TStringField;
-    cdsConsultavendedor: TStringField;
-    cdsConsultaobservacao: TStringField;
-    cdsConsultaobservacao_entrega: TMemoField;
-    cdsConsultasubtotal: TFloatField;
-    cdsConsultadesconto: TFloatField;
+    cdsConsultadthr_venda: TDateTimeField;
+    cdsConsultaidcliente: TIntegerField;
+    cdsConsultanome_cliente: TStringField;
     cdsConsultatotal: TFloatField;
-    procedure grdConsultaDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    cdsConsultastatus: TStringField;
     procedure grdConsultaKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
   private
     { Private declarations }
     ControllerVenda: IController<TVenda>;
 
+    //procedure RemoverIens;
     procedure Search(var CommandSQL: String; var Vendas: TObjectList<TVenda>);
     procedure ExecuteFrom(Id: Integer = 0);
   protected
@@ -50,7 +46,7 @@ implementation
 
 uses
   System.UITypes, uView.CustomFormFilterVenda, uController.RootVenda, uController.DataConverter.Venda,
-  uModel.ConstsStatement, uController.Venda, uView.Vendas;
+  uModel.ConstsStatement, uController.Venda, uView.Vendas, uModel.Entities.VendaItem;
 
 { TfrmConsulta2 }
 
@@ -72,10 +68,26 @@ begin
 end;
 
 procedure TfrmConsultaVenda.Change;
+var
+  Statement: IStatement;
 begin
   inherited;
-  
+
+  if cdsConsulta.IsEmpty then
+    begin
+      ShowMessage('A listagem esta vazia. Faça uma constula primeiro para poder alterar um registro.');
+      Exit;
+    end;
+
   State:= dsEdit;
+
+  Statement:= ControllerVenda.FindExists(ctSQLVendaFindEfetivada, 'idvenda', ftInteger, cdsConsultaidvenda.AsInteger);
+
+  if Statement.Query.FieldByName('status').AsString = 'E' then
+    begin
+      ShowMessage('Venda efetivada não é possível alterar.');
+      Exit;
+    end;
 
   ExecuteFrom(cdsConsultaidvenda.AsInteger);
 end;
@@ -92,22 +104,40 @@ end;
 procedure TfrmConsultaVenda.Delete;
 const
   Msg = 'Deseja realmente exluir o registro selecionado?';
+var
+  Venda: TVenda;
+  Statement: IStatement;
 begin
   inherited;
 
   if cdsConsulta.IsEmpty then
     begin
-      ShowMessage('N�o existe nenhum registro para ser deletado.');
+      ShowMessage('Não existe nenhum registro para ser deletado.');
+      Exit;
+    end;
+
+  Statement:= ControllerVenda.FindExists(ctSQLVendaFindEfetivada, 'idvenda', ftInteger, cdsConsultaidvenda.AsInteger);
+
+  if Statement.Query.FieldByName('status').AsString = 'E' then
+    begin
+      ShowMessage('Venda efetivada não é possível excluir.');
       Exit;
     end;
 
   if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
-      if ControllerVenda.DeleteById(cdsConsultaidvenda.AsInteger) then
-        begin
-          ShowMessage('Registro deletado com sucesso.');
-          All;
-        end;
+      Venda:= TVenda.Create;
+      try
+        Venda.IdVenda:= cdsConsultaidvenda.AsInteger;
+        //RemoverIens;
+        if ControllerVenda.DeleteById(Venda) then
+          begin
+            ShowMessage('Registro deletado com sucesso.');
+            All;
+          end;
+      finally
+        FreeAndNil(Venda);
+      end;
     end;
 end;
 procedure TfrmConsultaVenda.DoShow;
@@ -147,26 +177,6 @@ begin
   end;
 end;
 
-procedure TfrmConsultaVenda.grdConsultaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-var
-  R: TRect;
-begin
-  inherited;
-  R := Rect;
-  Dec(R.Bottom, 2);
-
-  if Column.Field = cdsConsulta.FieldByName('Observacao_Entrega') then
-    begin
-      if not (gdSelected in State) then
-        begin
-          grdConsulta.Canvas.FillRect(Rect);
-          grdConsulta.Canvas.TextRect(R,R.Left,R.Top,
-          cdsConsulta.FieldByName('Observacao_Entrega').AsString);
-        end;
-    end;
-end;
-
 procedure TfrmConsultaVenda.grdConsultaKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -182,6 +192,7 @@ begin
   FromVenda:= TfrmVenda.Create(Self);
   try
     FromVenda.Id:= Id;
+    FromVenda.Editing:= True;
     FromVenda.ShowModal;
   finally
     FreeAndNil(FromVenda);
@@ -195,6 +206,29 @@ begin
 
   ExecuteFrom;
 end;
+
+{procedure TfrmConsultaVenda.RemoverIens;
+var
+  Itens: TObjectList<TVendaItem>;
+  ControllerVendaItem: IController<TVendaItem>;
+  VendaItem: TVendaItem;
+  i: Integer;
+begin
+  VendaItem:= TVendaItem.Create;
+  try
+    VendaItem.IdVenda:= cdsConsultaidvenda.AsInteger;
+    Itens:= ControllerVendaItem.FindAll(ctSQLVendaItemFindID, VendaItem);
+
+    for i:= 0 to Itens.Count -1 do
+      begin
+        ControllerVendaItem.DeleteById(VendaItem);
+      end;
+
+  finally
+    FreeAndNil(VendaItem);
+    FreeAndNil(Itens);
+  end;
+end;}
 
 procedure TfrmConsultaVenda.Search(var CommandSQL: String; var Vendas: TObjectList<TVenda>);
 var

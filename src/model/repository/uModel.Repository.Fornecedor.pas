@@ -3,7 +3,8 @@ unit uModel.Repository.Fornecedor;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Fornecedor;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Fornecedor,
+  Data.DB;
 
 type
   TFornecedorRepository = class(TInterfacedObject, IRepository<TFornecedor>)
@@ -15,13 +16,15 @@ type
     function CurrentGeneratedValue: Integer;
     function Save(Entity: TFornecedor): Boolean;
     procedure AfterSave(Entity: TFornecedor);
-    function Update(Entity: TFornecedor): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TFornecedor): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function DeleteById(Entity: TFornecedor): Boolean;
     function FindById(Id: Integer): TFornecedor;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TFornecedor>; overload;
-    function FindAll(CommadSQL: String): TObjectList<TFornecedor>;overload;
+    function FindAll(CommadSQL: String): TObjectList<TFornecedor>; overload;
+    function FindAll(CommadSQL: String; Entity: TFornecedor): TObjectList<TFornecedor>; overload;
     function Frist: TFornecedor;
     function Previous(Id: Integer): TFornecedor;
     function Next(Id: Integer): TFornecedor;
@@ -37,7 +40,8 @@ implementation
 uses
   System.SysUtils, FireDAC.Stan.Error, uModel.Repository.StatementFactory,
   uModel.DataManagerFactory, uModel.Repository.DataManager,
-  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement;
+  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement,
+  uModel.Repository.RepositoryContext;
 
 procedure TFornecedorRepository.AfterSave(Entity: TFornecedor);
 begin
@@ -49,7 +53,7 @@ begin
   Result:= 0;
 end;
 
-function TFornecedorRepository.DeleteById(Id: Integer): Boolean;
+function TFornecedorRepository.DeleteById(Entity: TFornecedor): Boolean;
 var
   Statement: IStatement;
 begin
@@ -57,7 +61,7 @@ begin
     Statement:= TStatementFactory.GetStatement(DataManager);
 
     Statement.Query.SQL.Add(ctSQLFornecedorDeleteByID);
-    Statement.Query.Params.ParamByName('idFornecedor').AsInteger:= Id;
+    Statement.Query.Params.ParamByName('idFornecedor').AsInteger:= Entity.IdFornecedor;
     Statement.Query.ExecSQL;
 
     Result:=  Statement.Query.RowsAffected = ctRowsAffected;
@@ -187,24 +191,15 @@ begin
   end;
 end;
 
-function TFornecedorRepository.FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean;
+function TFornecedorRepository.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 var
-  Statement: IStatement;
+  RepositoryContext: TRepositoryContext;
 begin
+  RepositoryContext:= TRepositoryContext.Create;
   try
-    Statement:= TStatementFactory.GetStatement(DataManager);
-
-    Statement.Query.SQL.Add(ctSQLFornecedorFindExistsCnpj);
-    Statement.Query.Params.ParamByName('cnpj').AsString:= Entity.Cnpj;
-    Statement.Query.Open;
-
-    Result:= Statement.Query.FieldByName('OCORRENCIA').AsInteger = ctRowsAffected;
-
-  except
-    on E: EFDDBEngineException do
-      begin
-        raise Exception.Create(TFireDACEngineException.GetMessage(E));
-      end;
+    Result:= RepositoryContext.FindExists(CommadSQL, Parameter, ParameterType, Value);
+  finally
+    FreeAndNil(RepositoryContext);
   end;
 end;
 
@@ -310,6 +305,12 @@ begin
   end;
 end;
 
+function TFornecedorRepository.Update(CommandSQL, Parameter: String;
+  Entity: TFornecedor): Boolean;
+begin
+  Result:= False;
+end;
+
 function TFornecedorRepository.Update(Entity: TFornecedor): Boolean;
 var
   Statement: IStatement;
@@ -332,6 +333,12 @@ begin
         raise Exception.Create(TFireDACEngineException.GetMessage(E));
       end;
   end;
+end;
+
+function TFornecedorRepository.FindAll(CommadSQL: String;
+  Entity: TFornecedor): TObjectList<TFornecedor>;
+begin
+  Result:= nil;
 end;
 
 end.

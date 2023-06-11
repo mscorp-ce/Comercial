@@ -11,7 +11,8 @@ type
     ClienteService: IService<TCliente>;
   public
     function Fields: TStrings;
-    function FindAll(CommadSQL: String): TObjectList<TCliente>;
+    function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
+    function FindAll(CommadSQL: String; Entity: TCliente): TObjectList<TCliente>; overload;
 
     constructor Create; reintroduce;
     destructor Destroy; override;
@@ -42,6 +43,12 @@ begin
   Items:= ClienteService.Fields;
 
   Result:= Items;
+end;
+
+function TControllerRootCliente.FindAll(CommadSQL: String;
+  Entity: TCliente): TObjectList<TCliente>;
+begin
+  Result:= nil;
 end;
 
 function TControllerRootCliente.FindAll(CommadSQL: String): TObjectList<TCliente>;

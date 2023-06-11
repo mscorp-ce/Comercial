@@ -90,6 +90,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>Comercial_Icon.ico</Icon_MainIcon>
+        <DCC_MapFile>3</DCC_MapFile>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -105,7 +107,7 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="view\uPrincipal.pas">
+        <DCCReference Include="view\uView.Principal.pas">
             <Form>frmPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
@@ -190,6 +192,26 @@
         <DCCReference Include="controller\uConntoller.FornecedorContext.pas"/>
         <DCCReference Include="view\Consulta\uView.FormConsulta.Produto.pas">
             <Form>frmConsultaProduto</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\uView.VendasItens.pas">
+            <Form>frmVendasItens</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="controller\uConntoller.ProdutoContext.pas"/>
+        <DCCReference Include="controller\uController.DataConverter.VendaItem.pas"/>
+        <DCCReference Include="controller\uController.RootVendaItem.pas"/>
+        <DCCReference Include="model\services\uModel.Services.VendaItem.pas"/>
+        <DCCReference Include="model\repository\uModel.Repository.VendaItem.pas"/>
+        <DCCReference Include="controller\uController.Format.pas"/>
+        <DCCReference Include="model\repository\uModel.Repository.RepositoryContext.pas"/>
+        <DCCReference Include="controller\uController.VendaItem.pas"/>
+        <DCCReference Include="view\uView.FormRelatorioVendasPorCliente.pas">
+            <Form>frmFormFormRelatorioVendasPorCliente</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="view\uView.FormFormRelatorioCliente.pas">
+            <Form>frmFormFormRelatorioCliente</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Release">
@@ -1134,5 +1156,5 @@ Count mtException_AntiFreeze=1
 mtException_AntiFreeze0="The application seems to be frozen."
 Count mtInvalidEmailMsg=1
 mtInvalidEmailMsg0="Invalid email."
-TextsCollection=English
+TextsCollection=
 EurekaLog Last Line -->

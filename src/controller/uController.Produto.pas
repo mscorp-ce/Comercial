@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Produto,
-  uModel.Services.Venda;
+  uModel.Services.Venda, Data.DB;
 
 type
   TControllerProduto = class(TInterfacedObject, IController<TProduto>)
@@ -14,13 +14,15 @@ type
     function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: TProduto): Boolean;
-    function Update(Id: Integer; Entity: TProduto): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TProduto): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function DeleteById(Entity: TProduto): Boolean;
     function FindById(Id: Integer): TProduto;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TProduto>; overload;
     function FindAll(CommadSQL: String): TObjectList<TProduto>; overload;
+    function FindAll(CommadSQL: String; Entity: TProduto): TObjectList<TProduto>; overload;
     function Frist: TProduto;
     function Previous(Id: Integer): TProduto;
     function Next(Id: Integer): TProduto;
@@ -42,9 +44,9 @@ begin
   ProdutoService:= TProdutoService.Create;
 end;
 
-function TControllerProduto.DeleteById(Id: Integer): Boolean;
+function TControllerProduto.DeleteById(Entity: TProduto): Boolean;
 begin
-  Result:= ProdutoService.DeleteById(Id);
+  Result:= ProdutoService.DeleteById(Entity);
 end;
 
 destructor TControllerProduto.Destroy;
@@ -72,9 +74,9 @@ begin
   Result:= ProdutoService.FindById(Id);
 end;
 
-function TControllerProduto.FindExists(CommadSQL: String; Parameter: String; Entity: TProduto): Boolean;
+function TControllerProduto.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= ProdutoService.FindExists(CommadSQL, Parameter, Entity);
+  Result:= ProdutoService.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TControllerProduto.FindExists: Boolean;
@@ -112,9 +114,21 @@ begin
   Result:= ProdutoService.Save(Entity);
 end;
 
-function TControllerProduto.Update(Id: Integer; Entity: TProduto): Boolean;
+function TControllerProduto.Update(CommandSQL, Parameter: String;
+  Entity: TProduto): Boolean;
 begin
-  Result:= ProdutoService.Update(Id, Entity);
+  Result:= False;
+end;
+
+function TControllerProduto.Update(Entity: TProduto): Boolean;
+begin
+  Result:= ProdutoService.Update(Entity);
+end;
+
+function TControllerProduto.FindAll(CommadSQL: String;
+  Entity: TProduto): TObjectList<TProduto>;
+begin
+  Result:= nil;
 end;
 
 end.

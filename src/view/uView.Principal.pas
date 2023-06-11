@@ -1,4 +1,4 @@
-unit uPrincipal;
+unit uView.Principal;
 
 interface
 
@@ -27,8 +27,12 @@ type
     procedure Fornecedores1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
     procedure Vendas1Click(Sender: TObject);
+    procedure Vendas2Click(Sender: TObject);
+    procedure Clientes2Click(Sender: TObject);
   private
     { Private declarations }
+  protected
+    procedure DoShow; override;
   public
     { Public declarations }
   end;
@@ -42,7 +46,8 @@ implementation
 
 uses
   uView.FormConsulta.Cliente, uView.FormConsulta.Fornecedor, uView.FormConsulta.Venda,
-  uView.FormConsulta.Produto;
+  uView.FormConsulta.Produto, uView.FormRelatorioVendasPorCliente,
+  uView.FormFormRelatorioCliente;
 
 procedure TfrmPrincipal.Clientes1Click(Sender: TObject);
 var
@@ -54,6 +59,23 @@ begin
   finally
     FreeAndNil(ConsultaCliente);
   end;
+end;
+
+procedure TfrmPrincipal.Clientes2Click(Sender: TObject);
+begin
+  frmFormFormRelatorioCliente:= TfrmFormFormRelatorioCliente.Create(nil);
+  try
+    frmFormFormRelatorioCliente.ShowModal;
+
+  finally
+    FreeAndNil(frmFormFormRelatorioCliente);
+  end;
+end;
+
+procedure TfrmPrincipal.DoShow;
+begin
+  inherited;
+  Self.WindowState:= wsMaximized;
 end;
 
 procedure TfrmPrincipal.Fornecedores1Click(Sender: TObject);
@@ -89,6 +111,17 @@ begin
     ConsultaVenda.ShowModal;
   finally
     FreeAndNil(ConsultaVenda);
+  end;
+end;
+
+procedure TfrmPrincipal.Vendas2Click(Sender: TObject);
+begin
+  frmFormFormRelatorioVendasPorCliente:= TfrmFormFormRelatorioVendasPorCliente.Create(nil);
+  try
+    frmFormFormRelatorioVendasPorCliente.ShowModal;
+
+  finally
+    FreeAndNil(frmFormFormRelatorioVendasPorCliente);
   end;
 end;
 

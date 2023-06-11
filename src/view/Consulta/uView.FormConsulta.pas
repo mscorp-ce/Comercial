@@ -15,7 +15,6 @@ type
     spbIncluir: TSpeedButton;
     spbAlterar: TSpeedButton;
     spbExcluir: TSpeedButton;
-    spbConsultar: TSpeedButton;
     spbSair: TSpeedButton;
     grdConsulta: TDBGrid;
     dsConsulta: TDataSource;
@@ -25,7 +24,6 @@ type
     procedure spbIncluirClick(Sender: TObject);
     procedure spbAlterarClick(Sender: TObject);
     procedure spbExcluirClick(Sender: TObject);
-    procedure spbConsultarClick(Sender: TObject);
     procedure spbSairClick(Sender: TObject);
   private
     { Private declarations }
@@ -56,11 +54,6 @@ end;
 procedure TfrmConsulta.spbAlterarClick(Sender: TObject);
 begin
   Change;
-end;
-
-procedure TfrmConsulta.spbConsultarClick(Sender: TObject);
-begin
-  Consult;
 end;
 
 procedure TfrmConsulta.spbExcluirClick(Sender: TObject);

@@ -29,10 +29,19 @@ type
     property Rollback: IDataManager read GetRollback;
   end;
 
+  IStatement = interface
+  ['{A144C1E6-259E-4C9E-8043-9D642E39A6D2}']
+    function GetQuery: TFDQuery;
+    function SQL(Value: String): IStatement;
+    function Open: IStatement;
+    property Query: TFDQuery read GetQuery;
+  end;
+
   IRootController<T: class> = interface
   ['{166FBDE6-2484-4AF7-914A-A6DE8AC453F5}']
     function Fields: TStrings;
-    function FindAll(CommadSQL: String): TObjectList<T>;
+    function FindAll(CommadSQL: String): TObjectList<T>; overload;
+    function FindAll(CommadSQL: String; Entity: T): TObjectList<T>; overload;
   end;
 
   IController<T: class> = interface(IRootController<T>)
@@ -40,12 +49,14 @@ type
     function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: T): Boolean;
-    function Update(Id: Integer; Entity: T): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: T): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: T): Boolean; overload;
+    function DeleteById(Entity: T): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
-    function FindAll: TObjectList<T>;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
+    function FindAll: TObjectList<T>; overload;
+    function FindAll(CommadSQL: String; Entity: T): TObjectList<T>; overload;
     function Frist: T;
     function Previous(Id: Integer): T;
     function Next(Id: Integer): T;
@@ -59,25 +70,20 @@ type
     function CurrentGeneratedValue: Integer;
     function IsValid(Entity: T; out MessageContext: String): Boolean;
     function Save(Entity: T): Boolean;
-    function Update(Id: Integer; Entity: T): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: T): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: T): Boolean; overload;
+    function DeleteById(Entity: T): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
+    function FindAll(CommadSQL: String; Entity: T): TObjectList<T>; overload;
     function Frist: T;
     function Previous(Id: Integer): T;
     function Next(Id: Integer): T;
     function Last: T;
-  end;
-
-  IStatement = interface
-  ['{A144C1E6-259E-4C9E-8043-9D642E39A6D2}']
-    function GetQuery: TFDQuery;
-    function SQL(Value: String): IStatement;
-    function Open: IStatement;
-    property Query: TFDQuery read GetQuery;
   end;
 
   IDataConverter<T: class> = interface
@@ -94,13 +100,16 @@ type
     function CurrentGeneratedValue: Integer;
     function Save(Entity: T): Boolean;
     procedure AfterSave(Entity: T);
-    function Update(Entity: T): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: T): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: T): Boolean; overload;
+    function DeleteById(Entity: T): Boolean;
     function FindById(Id: Integer): T;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: T): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<T>; overload;
     function FindAll(CommadSQL: String): TObjectList<T>; overload;
+    function FindAll(CommadSQL: String; Entity: T): TObjectList<T>; overload;
     function Frist: T;
     function Previous(Id: Integer): T;
     function Next(Id: Integer): T;
@@ -109,6 +118,7 @@ type
 
 var
   State: TState;
+  StateItens: TState;
 
 implementation
 

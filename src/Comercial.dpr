@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   Vcl.Themes,
   Vcl.Styles,
-  uPrincipal in 'view\uPrincipal.pas' {frmPrincipal},
+  uView.Principal in 'view\uView.Principal.pas' {frmPrincipal},
   uLibary in 'uLibary.pas',
   uModel.Entities.Cliente in 'model\entities\uModel.Entities.Cliente.pas',
   uModel.Entities.Fornecedor in 'model\entities\uModel.Entities.Fornecedor.pas',
@@ -54,7 +54,18 @@ uses
   uView.CustomFormFilterProduto in 'view\Consulta\uView.CustomFormFilterProduto.pas',
   uView.Produto in 'view\uView.Produto.pas' {frmProduto},
   uConntoller.FornecedorContext in 'controller\uConntoller.FornecedorContext.pas',
-  uView.FormConsulta.Produto in 'view\Consulta\uView.FormConsulta.Produto.pas' {frmConsultaProduto};
+  uView.FormConsulta.Produto in 'view\Consulta\uView.FormConsulta.Produto.pas' {frmConsultaProduto},
+  uView.VendasItens in 'view\uView.VendasItens.pas' {frmVendasItens},
+  uConntoller.ProdutoContext in 'controller\uConntoller.ProdutoContext.pas',
+  uController.DataConverter.VendaItem in 'controller\uController.DataConverter.VendaItem.pas',
+  uController.RootVendaItem in 'controller\uController.RootVendaItem.pas',
+  uModel.Services.VendaItem in 'model\services\uModel.Services.VendaItem.pas',
+  uModel.Repository.VendaItem in 'model\repository\uModel.Repository.VendaItem.pas',
+  uController.Format in 'controller\uController.Format.pas',
+  uModel.Repository.RepositoryContext in 'model\repository\uModel.Repository.RepositoryContext.pas',
+  uController.VendaItem in 'controller\uController.VendaItem.pas',
+  uView.FormRelatorioVendasPorCliente in 'view\uView.FormRelatorioVendasPorCliente.pas' {frmFormFormRelatorioVendasPorCliente},
+  uView.FormFormRelatorioCliente in 'view\uView.FormFormRelatorioCliente.pas' {frmFormFormRelatorioCliente};
 
 {$R *.res}
 

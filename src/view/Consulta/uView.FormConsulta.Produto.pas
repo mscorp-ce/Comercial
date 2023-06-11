@@ -45,7 +45,7 @@ implementation
 uses
   System.UITypes, uModel.ConstsStatement, uController.RootProduto,
   uController.Produto, uController.DataConverter.Produto, uView.Produto,
-  uView.CustomFormFilterProduto;
+  uView.CustomFormFilterProduto, uConntoller.ProdutoContext;
 
 { TfrmConsulta2 }
 
@@ -87,6 +87,8 @@ end;
 procedure TfrmConsultaProduto.Delete;
 const
   Msg = 'Deseja realmente exluir o registro selecionado?';
+var
+  Produto: TProduto;
 begin
   inherited;
 
@@ -98,11 +100,17 @@ begin
 
   if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
-      if ControllerProduto.DeleteById(cdsConsulta.FieldByName('idProduto').AsInteger) then
-        begin
-          ShowMessage('Registro deletado com sucesso.');
-          All;
-        end;
+      Produto:= TProduto.Create;
+      try
+        Produto.IdProduto:= cdsConsulta.FieldByName('idProduto').AsInteger;
+        if ControllerProduto.DeleteById(Produto) then
+          begin
+            ShowMessage('Registro deletado com sucesso.');
+            All;
+          end;
+      finally
+        FreeAndNil(Produto);
+      end;
     end;
 end;
 
@@ -174,6 +182,18 @@ end;
 
 procedure TfrmConsultaProduto.Search(var CommandSQL: String; var Produtos: TObjectList<TProduto>);
 var
+  ProdutoContext: TProdutoContext;
+begin
+  inherited;
+
+  ProdutoContext:= TProdutoContext.Create;
+  try
+    ProdutoContext.List(Produtos, cdsConsulta);
+  finally
+    FreeAndNil(ProdutoContext);
+  end;
+
+{var
   ControllerRootProduto: IRootController<TProduto>;
   DataConverter: IDataConverter<TProduto>;
 begin
@@ -187,7 +207,7 @@ begin
   DataConverter:= TDataConverterProduto.Create;
   DataConverter.Populate(Produtos, cdsConsulta);
 
-  cdsConsulta.Open;
+  cdsConsulta.Open;}
 end;
 
 end.

@@ -17,13 +17,16 @@ type
     function IsValid(Entity: TVenda; out MessageContext: String): Boolean;
     function Save(Entity: TVenda): Boolean;
     procedure AfterSave(Entity: TVenda);
-    function Update(Id: Integer; Entity: TVenda): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TVenda): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    function DeleteById(Entity: TVenda): Boolean;
     function FindById(Id: Integer): TVenda;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TVenda>; overload;
     function FindAll(CommadSQL: String): TObjectList<TVenda>; overload;
+    function FindAll(CommadSQL: String; Entity: TVenda): TObjectList<TVenda>; overload;
     function Frist: TVenda;
     function Previous(Id: Integer): TVenda;
     function Next(Id: Integer): TVenda;
@@ -37,9 +40,11 @@ implementation
 
 { TVendaService }
 
+uses uModel.ConstsStatement, Vcl.Dialogs, System.SysUtils;
+
 procedure TVendaService.AfterSave(Entity: TVenda);
 begin
-  Entity.IdVenda:= CurrentGeneratedValue;
+
 end;
 
 constructor TVendaService.Create;
@@ -54,9 +59,9 @@ begin
   Result:= VendaRepository.CurrentGeneratedValue;
 end;
 
-function TVendaService.DeleteById(Id: Integer): Boolean;
+function TVendaService.DeleteById(Entity: TVenda): Boolean;
 begin
-  Result:= VendaRepository.DeleteById(Id);
+  Result:= VendaRepository.DeleteById(Entity);
 end;
 
 destructor TVendaService.Destroy;
@@ -83,14 +88,21 @@ begin
   Result:= VendaRepository.FindAll(CommadSQL);
 end;
 
+function TVendaService.FindAll(CommadSQL: String;
+  Entity: TVenda): TObjectList<TVenda>;
+begin
+  Result:= nil;
+end;
+
 function TVendaService.FindById(Id: Integer): TVenda;
 begin
   Result:= VendaRepository.FindById(Id);
 end;
 
-function TVendaService.FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean;
+function TVendaService.FindExists(CommadSQL: String; Parameter: String;
+  ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= False;
+  Result:= VendaRepository.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TVendaService.FindExists: Boolean;
@@ -109,20 +121,41 @@ begin
 end;
 
 function TVendaService.IsValid(Entity: TVenda; out MessageContext: String): Boolean;
+var
+  Statement: IStatement;
 begin
   Result:= False;
 
   if Entity.IdVenda <= 0 then
-    Exit;
+    begin
+      MessageContext:= 'IdVenda inválido.';
+      Exit;
+    end;
 
-  if Entity.DataHoraVenda = 0 then
-    Exit;
+  if (DateToStr(Entity.DataHoraVenda) = '00/00/0000') or (Entity.DataHoraVenda = 0) then
+    begin
+      MessageContext:= 'Infome uma data válida.';
+      Exit;
+    end;
 
   if Entity.Cliente.IdCliente <= 0 then
     Exit;
 
-  //if ( Entity.Total > Entity.Subtotal) then
-  //  Exit;
+  Statement:= FindExists(ctSQLClienteFindExists, 'idcliente', ftInteger, Entity.Cliente.IdCliente);
+
+  if Statement.Query.FieldByName('idcliente').AsInteger = 0  then
+    begin
+      MessageContext:= 'Cliente não cadstrado, informe um cliente válido.';
+      Exit;
+    end;
+
+  Statement:= FindExists(ctSQLClienteFindInativo, 'idcliente', ftInteger, Entity.Cliente.IdCliente);
+
+  if (Entity.Status = 'E') and (Statement.Query.FieldByName('status').AsString = 'I') then
+    begin
+      MessageContext:= 'Não é possível efettivar uma venda para um cliente intativo, selecione um cliente que estaja ativo.';
+      Exit;
+    end;
 
   if Length( Entity.Status) = 0 then
     Exit;
@@ -147,19 +180,30 @@ end;
 
 function TVendaService.Save(Entity: TVenda): Boolean;
 var
-  Return: Boolean;
+  MessageContext: String;
 begin
-  Return:= VendaRepository.Save(Entity);
-  if Return then
-    AfterSave(Entity);
+  Result:= False;
 
-  Result:= Return;
+  if IsValid(Entity, MessageContext) then
+    Result:= VendaRepository.Save(Entity)
+  else ShowMessage(MessageContext);
 end;
 
-function TVendaService.Update(Id: Integer; Entity: TVenda): Boolean;
+function TVendaService.Update(CommandSQL, Parameter: String;
+  Entity: TVenda): Boolean;
 begin
-  Entity.IdVenda:= Id;
-  Result:= VendaRepository.Update(Entity);
+  Result:= VendaRepository.Update(CommandSQL, Parameter, Entity);
+end;
+
+function TVendaService.Update(Entity: TVenda): Boolean;
+var
+  MessageContext: String;
+begin
+  Result:= False;
+
+  if IsValid(Entity, MessageContext) then
+    Result:= VendaRepository.Update(Entity)
+  else ShowMessage(MessageContext);
 end;
 
 end.

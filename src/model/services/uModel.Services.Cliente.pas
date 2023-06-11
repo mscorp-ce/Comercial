@@ -3,7 +3,8 @@ unit uModel.Services.Cliente;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Cliente;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Cliente,
+  Data.DB;
 
 type
   TClienteService = class(TInterfacedObject, IService<TCliente>)
@@ -15,13 +16,16 @@ type
     function CurrentGeneratedValue: Integer;
     function IsValid(Entity: TCliente; out MessageContext: String): Boolean;
     function Save(Entity: TCliente): Boolean;
-    function Update(Id: Integer; Entity: TCliente): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TCliente): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function DeleteById(Entity: TCliente): Boolean;
     function FindById(Id: Integer): TCliente;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TCliente>; overload;
     function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
+    function FindAll(CommadSQL: String; Entity: TCliente): TObjectList<TCliente>; overload;
     function Frist: TCliente;
     function Previous(Id: Integer): TCliente;
     function Next(Id: Integer): TCliente;
@@ -49,9 +53,9 @@ begin
   Result:= 0;
 end;
 
-function TClienteService.DeleteById(Id: Integer): Boolean;
+function TClienteService.DeleteById(Entity: TCliente): Boolean;
 begin
-  Result:= ClienteRepository.DeleteById(Id);
+  Result:= ClienteRepository.DeleteById(Entity);
 end;
 
 destructor TClienteService.Destroy;
@@ -78,14 +82,21 @@ begin
   Result:= ClienteRepository.FindAll(CommadSQL);
 end;
 
+function TClienteService.FindAll(CommadSQL: String;
+  Entity: TCliente): TObjectList<TCliente>;
+begin
+  Result:= nil;
+end;
+
 function TClienteService.FindById(Id: Integer): TCliente;
 begin
   Result:= ClienteRepository.FindById(Id);
 end;
 
-function TClienteService.FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean;
+function TClienteService.FindExists(CommadSQL: String; Parameter: String;
+  ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= ClienteRepository.FindExists(CommadSQL, Parameter, Entity);
+  Result:= ClienteRepository.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TClienteService.FindExists: Boolean;
@@ -106,6 +117,7 @@ end;
 function TClienteService.IsValid(Entity: TCliente; out MessageContext: String): Boolean;
 var
   fIsValid: Boolean;
+  Statement: IStatement;
 begin
   Result:= False;
 
@@ -139,12 +151,15 @@ begin
       Exit;
     end;
 
-  if FindExists(ctSQLClienteFindExistsCpf, 'cpf', Entity) then
+  Statement:= FindExists(ctSQLClienteFindExistsCpf, 'cpf', ftString, Entity.Cpf);
+
+  if (Statement.Query.FieldByName('idcliente').AsInteger > 0) and (Entity.IdCliente <> Statement.Query.FieldByName('idcliente').AsInteger) then
     begin
       MessageContext:= 'Cpf já cadastrado.';
+      Exit;
     end;
 
-  fIsValid:= Entity.IsCPF(Entity.Cpf);
+    fIsValid:= Entity.IsCPF(Entity.Cpf);
 
   if fIsValid then
     Result:= True
@@ -178,13 +193,15 @@ begin
   if IsValid(Entity, MessageContext) then
     Result:= ClienteRepository.Save(Entity)
   else ShowMessage(MessageContext);
-  {if Return then
-    AfterSave(Entity);}
-
-  //Result:= Return;
 end;
 
-function TClienteService.Update(Id: Integer; Entity: TCliente): Boolean;
+function TClienteService.Update(CommandSQL, Parameter: String;
+  Entity: TCliente): Boolean;
+begin
+  Result:= False;
+end;
+
+function TClienteService.Update(Entity: TCliente): Boolean;
 var
   MessageContext: String;
 begin

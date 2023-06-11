@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Venda,
-  uModel.Services.Venda;
+  uModel.Services.Venda, Data.DB;
 
 type
   TControllerVenda = class(TInterfacedObject, IController<TVenda>)
@@ -14,13 +14,15 @@ type
     function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: TVenda): Boolean;
-    function Update(Id: Integer; Entity: TVenda): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TVenda): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    function DeleteById(Entity: TVenda): Boolean;
     function FindById(Id: Integer): TVenda;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TVenda>; overload;
     function FindAll(CommadSQL: String): TObjectList<TVenda>; overload;
+    function FindAll(CommadSQL: String; Entity: TVenda): TObjectList<TVenda>; overload;
     function Frist: TVenda;
     function Previous(Id: Integer): TVenda;
     function Next(Id: Integer): TVenda;
@@ -40,9 +42,9 @@ begin
   VendaService:= TVendaService.Create;
 end;
 
-function TControllerVenda.DeleteById(Id: Integer): Boolean;
+function TControllerVenda.DeleteById(Entity: TVenda): Boolean;
 begin
-  Result:= VendaService.DeleteById(Id);
+  Result:= VendaService.DeleteById(Entity);
 end;
 
 destructor TControllerVenda.Destroy;
@@ -70,9 +72,9 @@ begin
   Result:= VendaService.FindById(Id);
 end;
 
-function TControllerVenda.FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean;
+function TControllerVenda.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= False;
+  Result:= VendaService.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TControllerVenda.FindExists: Boolean;
@@ -87,7 +89,7 @@ end;
 
 function TControllerVenda.GeneratedValue: Integer;
 begin
-  Result:= 0;
+  Result:= VendaService.GeneratedValue;
 end;
 
 function TControllerVenda.Last: TVenda;
@@ -110,9 +112,21 @@ begin
   Result:= VendaService.Save(Entity);
 end;
 
-function TControllerVenda.Update(Id: Integer; Entity: TVenda): Boolean;
+function TControllerVenda.Update(CommandSQL, Parameter: String;
+  Entity: TVenda): Boolean;
 begin
-  Result:= VendaService.Update(Id, Entity);
+  Result:= VendaService.Update(CommandSQL,Parameter, Entity);
+end;
+
+function TControllerVenda.Update(Entity: TVenda): Boolean;
+begin
+  Result:= VendaService.Update(Entity);
+end;
+
+function TControllerVenda.FindAll(CommadSQL: String;
+  Entity: TVenda): TObjectList<TVenda>;
+begin
+  Result:= nil;
 end;
 
 end.

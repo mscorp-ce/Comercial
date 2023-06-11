@@ -3,7 +3,8 @@ unit uModel.Services.Fornecedor;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Fornecedor;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Fornecedor,
+  Data.DB;
 
 type
   TFornecedorService = class(TInterfacedObject, IService<TFornecedor>)
@@ -15,13 +16,15 @@ type
     function CurrentGeneratedValue: Integer;
     function IsValid(Entity: TFornecedor; out MessageContext: String): Boolean;
     function Save(Entity: TFornecedor): Boolean;
-    function Update(Id: Integer; Entity: TFornecedor): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TFornecedor): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function DeleteById(Entity: TFornecedor): Boolean;
     function FindById(Id: Integer): TFornecedor;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TFornecedor>; overload;
     function FindAll(CommadSQL: String): TObjectList<TFornecedor>; overload;
+    function FindAll(CommadSQL: String; Entity: TFornecedor): TObjectList<TFornecedor>; overload;
     function Frist: TFornecedor;
     function Previous(Id: Integer): TFornecedor;
     function Next(Id: Integer): TFornecedor;
@@ -49,9 +52,9 @@ begin
   Result:= 0;
 end;
 
-function TFornecedorService.DeleteById(Id: Integer): Boolean;
+function TFornecedorService.DeleteById(Entity: TFornecedor): Boolean;
 begin
-  Result:= FornecedorRepository.DeleteById(Id);
+  Result:= FornecedorRepository.DeleteById(Entity);
 end;
 
 destructor TFornecedorService.Destroy;
@@ -78,14 +81,20 @@ begin
   Result:= FornecedorRepository.FindAll(CommadSQL);
 end;
 
+function TFornecedorService.FindAll(CommadSQL: String;
+  Entity: TFornecedor): TObjectList<TFornecedor>;
+begin
+  Result:= nil;
+end;
+
 function TFornecedorService.FindById(Id: Integer): TFornecedor;
 begin
   Result:= FornecedorRepository.FindById(Id);
 end;
 
-function TFornecedorService.FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean;
+function TFornecedorService.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= FornecedorRepository.FindExists(CommadSQL, Parameter, Entity);
+  Result:= FornecedorRepository.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TFornecedorService.FindExists: Boolean;
@@ -106,6 +115,7 @@ end;
 function TFornecedorService.IsValid(Entity: TFornecedor; out MessageContext: String): Boolean;
 var
   fIsValid: Boolean;
+  Statement: IStatement;
 begin
   Result:= False;
 
@@ -139,9 +149,20 @@ begin
       Exit;
     end;
 
-  if FindExists(ctSQLClienteFindExistsCpf, 'cpf', Entity) then
+  {Statement:= FindExists(ctSQLFornecedorFindExistsIdFornecedor, 'idfornecedor', ftInteger, Entity.IdFornecedor);
+
+  if Statement.Query.FieldByName('idfornecedor').AsInteger = 0  then
+    begin
+      MessageContext:= 'Fornecedor não cadstrado, informe um fornecedor válido.';
+      Exit;
+    end;}
+
+  Statement:= FindExists(ctSQLFornecedorFindExistsCnpj, 'cnpj', ftString, Entity.Cnpj);
+
+  if (Statement.Query.FieldByName('idfornecedor').AsInteger > 0) and (Statement.Query.FieldByName('idfornecedor').AsInteger <> Entity.IdFornecedor)  then
     begin
       MessageContext:= 'Cnpj já cadastrado.';
+      Exit;
     end;
 
   fIsValid:= Entity.IsCnpj(Entity.Cnpj);
@@ -184,7 +205,13 @@ begin
   //Result:= Return;
 end;
 
-function TFornecedorService.Update(Id: Integer; Entity: TFornecedor): Boolean;
+function TFornecedorService.Update(CommandSQL, Parameter: String;
+  Entity: TFornecedor): Boolean;
+begin
+  Result:= False;
+end;
+
+function TFornecedorService.Update(Entity: TFornecedor): Boolean;
 var
   MessageContext: String;
 begin

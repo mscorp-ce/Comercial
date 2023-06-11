@@ -3,7 +3,8 @@ unit uModel.Repository.Cliente;
 interface
 
 uses
-  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Cliente;
+  System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Cliente,
+  Data.DB;
 
 type
   TClienteRepository = class(TInterfacedObject, IRepository<TCliente>)
@@ -15,13 +16,16 @@ type
     function CurrentGeneratedValue: Integer;
     function Save(Entity: TCliente): Boolean;
     procedure AfterSave(Entity: TCliente);
-    function Update(Entity: TCliente): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TCliente): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function DeleteById(Entity: TCliente): Boolean;
     function FindById(Id: Integer): TCliente;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TCliente>; overload;
-    function FindAll(CommadSQL: String): TObjectList<TCliente>;overload;
+    function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
+    function FindAll(CommadSQL: String; Entity: TCliente): TObjectList<TCliente>; overload;
     function Frist: TCliente;
     function Previous(Id: Integer): TCliente;
     function Next(Id: Integer): TCliente;
@@ -37,7 +41,8 @@ implementation
 uses
   System.SysUtils, FireDAC.Stan.Error, uModel.Repository.StatementFactory,
   uModel.DataManagerFactory, uModel.Repository.DataManager,
-  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement;
+  uModel.FireDACEngineException, FireDAC.Stan.Param, uModel.ConstsStatement,
+  uModel.Repository.RepositoryContext;
 
 procedure TClienteRepository.AfterSave(Entity: TCliente);
 begin
@@ -49,7 +54,7 @@ begin
   Result:= 0;
 end;
 
-function TClienteRepository.DeleteById(Id: Integer): Boolean;
+function TClienteRepository.DeleteById(Entity: TCliente): Boolean;
 var
   Statement: IStatement;
 begin
@@ -57,7 +62,7 @@ begin
     Statement:= TStatementFactory.GetStatement(DataManager);
 
     Statement.Query.SQL.Add(ctSQLClienteDeleteByID);
-    Statement.Query.Params.ParamByName('idcliente').AsInteger:= Id;
+    Statement.Query.Params.ParamByName('idcliente').AsInteger:= Entity.IdCliente;
     Statement.Query.ExecSQL;
 
     Result:=  Statement.Query.RowsAffected = ctRowsAffected;
@@ -187,9 +192,17 @@ begin
   end;
 end;
 
-function TClienteRepository.FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean;
+function TClienteRepository.FindExists(CommadSQL: String; Parameter: String;
+  ParameterType: TFieldType; Value: Variant): IStatement;
+var
+  RepositoryContext: TRepositoryContext;
 begin
-  Result:= False;
+  RepositoryContext:= TRepositoryContext.Create;
+  try
+    Result:= RepositoryContext.FindExists(CommadSQL, Parameter, ParameterType, Value);
+  finally
+    FreeAndNil(RepositoryContext);
+  end;
 end;
 
 function TClienteRepository.FindExists: Boolean;
@@ -294,6 +307,12 @@ begin
   end;
 end;
 
+function TClienteRepository.Update(CommandSQL, Parameter: String;
+  Entity: TCliente): Boolean;
+begin
+  Result:= False;
+end;
+
 function TClienteRepository.Update(Entity: TCliente): Boolean;
 var
   Statement: IStatement;
@@ -316,6 +335,12 @@ begin
         raise Exception.Create(TFireDACEngineException.GetMessage(E));
       end;
   end;
+end;
+
+function TClienteRepository.FindAll(CommadSQL: String;
+  Entity: TCliente): TObjectList<TCliente>;
+begin
+  Result:= nil;
 end;
 
 end.

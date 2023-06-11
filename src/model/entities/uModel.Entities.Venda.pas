@@ -19,6 +19,9 @@ type
     procedure SetStatus(const Value: String);
     procedure SetTotal(const Value: Double);
   public
+    constructor Create;
+    destructor Destroy; override;
+
     property IdVenda: Integer read FIdVenda write SetIdVenda;
     property DataHoraVenda: TDateTime read FDataHoraVenda write SetDataHoraVenda;
     property Cliente: TCliente read FCliente write SetCliente;
@@ -28,11 +31,28 @@ type
 
 implementation
 
+uses
+  System.SysUtils;
+
 { TVenda }
 
 procedure TVenda.SetDataHoraVenda(const Value: TDateTime);
 begin
   FDataHoraVenda := Value;
+end;
+
+constructor TVenda.Create;
+begin
+  inherited Create;
+
+  FCliente:= TCliente.Create;
+end;
+
+destructor TVenda.Destroy;
+begin
+  FreeAndNil(FCliente);
+
+  inherited Destroy;
 end;
 
 procedure TVenda.SetCliente(const Value: TCliente);

@@ -35,7 +35,8 @@ begin
       Target.Append;
       Target.FieldByName('idvenda').AsInteger:= Source.Items[i].IdVenda;
       Target.FieldByName('dthr_venda').AsDateTime:= Source.Items[i].DataHoraVenda;
-      Target.FieldByName('cliente').AsString:= Source.Items[i].Cliente.Nome;
+      Target.FieldByName('idcliente').AsInteger:= Source.Items[i].Cliente.IdCliente;
+      Target.FieldByName('nome_cliente').AsString:= Source.Items[i].Cliente.Nome;
       Target.FieldByName('Total').AsFloat:= Source.Items[i].Total;
       Target.FieldByName('status').AsString:= Source.Items[i].Status;
       Target.Post;

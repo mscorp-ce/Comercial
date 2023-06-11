@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Fornecedor,
-  uModel.Services.Venda;
+  uModel.Services.Venda, Data.DB;
 
 type
   TControllerFornecedor = class(TInterfacedObject, IController<TFornecedor>)
@@ -14,13 +14,15 @@ type
     function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: TFornecedor): Boolean;
-    function Update(Id: Integer; Entity: TFornecedor): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TFornecedor): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function DeleteById(Entity: TFornecedor): Boolean;
     function FindById(Id: Integer): TFornecedor;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TFornecedor>; overload;
     function FindAll(CommadSQL: String): TObjectList<TFornecedor>; overload;
+    function FindAll(CommadSQL: String; Entity: TFornecedor): TObjectList<TFornecedor>; overload;
     function Frist: TFornecedor;
     function Previous(Id: Integer): TFornecedor;
     function Next(Id: Integer): TFornecedor;
@@ -42,9 +44,9 @@ begin
   FornecedorService:= TFornecedorService.Create;
 end;
 
-function TControllerFornecedor.DeleteById(Id: Integer): Boolean;
+function TControllerFornecedor.DeleteById(Entity: TFornecedor): Boolean;
 begin
-  Result:= FornecedorService.DeleteById(Id);
+  Result:= FornecedorService.DeleteById(Entity);
 end;
 
 destructor TControllerFornecedor.Destroy;
@@ -72,9 +74,9 @@ begin
   Result:= FornecedorService.FindById(Id);
 end;
 
-function TControllerFornecedor.FindExists(CommadSQL: String; Parameter: String; Entity: TFornecedor): Boolean;
+function TControllerFornecedor.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= FornecedorService.FindExists(CommadSQL, Parameter, Entity);
+  Result:= FornecedorService.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TControllerFornecedor.FindExists: Boolean;
@@ -112,9 +114,21 @@ begin
   Result:= FornecedorService.Save(Entity);
 end;
 
-function TControllerFornecedor.Update(Id: Integer; Entity: TFornecedor): Boolean;
+function TControllerFornecedor.Update(CommandSQL, Parameter: String;
+  Entity: TFornecedor): Boolean;
 begin
-  Result:= FornecedorService.Update(Id, Entity);
+  Result:= False;
+end;
+
+function TControllerFornecedor.Update(Entity: TFornecedor): Boolean;
+begin
+  Result:= FornecedorService.Update(Entity);
+end;
+
+function TControllerFornecedor.FindAll(CommadSQL: String;
+  Entity: TFornecedor): TObjectList<TFornecedor>;
+begin
+  Result:= nil;
 end;
 
 end.

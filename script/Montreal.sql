@@ -83,6 +83,7 @@ quantidade numeric(15,2) not null,
 preco_unitario numeric(15,2) not null,
 total numeric(15,2) not null,
 CONSTRAINT FK_idproduto_Ven FOREIGN KEY(idproduto) REFERENCES produtos(idproduto),
+CONSTRAINT FK_idvenda_Ven FOREIGN KEY(idvenda) REFERENCES vendas(idvenda),
 CONSTRAINT PK_Vendaitens PRIMARY KEY(idvenda, item)
 );
 
@@ -99,21 +100,3 @@ BEGIN
 END
 GO
 
-CREATE OR ALTER TRIGGER TRG_vendaitens_AI_AU
-ON vendaitens  
-AFTER INSERT, UPDATE
-AS  
-DECLARE @idvenda INTEGER, @total NUMERIC(15,2);
-
-SELECT @idvenda = INSERTED.idvenda FROM INSERTED;
-
-SELECT @total = COALESCE(SUM(total), 0)
-  FROM vendaitens 
- WHERE idvenda = @idvenda;	
-
-SELECT @total = INSERTED.total FROM INSERTED;	
-
-UPDATE Vendas 
-   SET total = @total
- WHERE idvenda = @idvenda;
-GO

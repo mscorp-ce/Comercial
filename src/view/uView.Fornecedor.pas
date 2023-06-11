@@ -69,6 +69,7 @@ procedure TfrmFornecedor.Save;
 begin
   inherited;
   SetProperty;
+
   case State of
     dsInsert:
       begin
@@ -82,7 +83,7 @@ begin
 
     dsEdit:
       begin
-        if ControllerFornecedor.Update(fId, Fornecedor) then
+        if ControllerFornecedor.Update(Fornecedor) then
           begin
             State:= dsBrowse;
             AfterSave;

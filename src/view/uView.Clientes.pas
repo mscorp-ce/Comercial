@@ -82,7 +82,7 @@ begin
 
     dsEdit:
       begin
-        if ControllerCliente.Update(fId, Cliente) then
+        if ControllerCliente.Update(Cliente) then
           begin
             State:= dsBrowse;
             AfterSave;

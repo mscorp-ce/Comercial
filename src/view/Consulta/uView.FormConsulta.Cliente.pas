@@ -87,6 +87,8 @@ end;
 procedure TfrmConsultaCliente.Delete;
 const
   Msg = 'Deseja realmente exluir o registro selecionado?';
+var
+  Cliente: TCliente;
 begin
   inherited;
 
@@ -98,11 +100,17 @@ begin
 
   if MessageDlg(Msg, mtConfirmation, [mbYes, mbNo], 0, mbYes) = mrYes then
     begin
-      if ControllerCliente.DeleteById(cdsConsulta.FieldByName('idcliente').AsInteger) then
-        begin
-          ShowMessage('Registro deletado com sucesso.');
-          All;
-        end;
+      Cliente:= TCliente.Create;
+      try
+        Cliente.IdCliente:= cdsConsulta.FieldByName('idcliente').AsInteger;
+        if ControllerCliente.DeleteById(Cliente) then
+          begin
+            ShowMessage('Registro deletado com sucesso.');
+            All;
+          end;
+      finally
+        FreeAndNil(Cliente);
+      end;
     end;
 end;
 

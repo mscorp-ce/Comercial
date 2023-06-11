@@ -17,13 +17,17 @@ type
     function CurrentGeneratedValue: Integer;
     function Save(Entity: TVenda): Boolean;
     procedure AfterSave(Entity: TVenda);
-    function Update(Entity: TVenda): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TVenda): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    procedure RemoverItens;
+    function DeleteById(Entity: TVenda): Boolean;
     function FindById(Id: Integer): TVenda;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String;
+      ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TVenda>; overload;
-    function FindAll(CommadSQL: String): TObjectList<TVenda>;overload;
+    function FindAll(CommadSQL: String): TObjectList<TVenda>; overload;
+    function FindAll(CommadSQL: String; Entity: TVenda): TObjectList<TVenda>; overload;
     function Frist: TVenda;
     function Previous(Id: Integer): TVenda;
     function Next(Id: Integer): TVenda;
@@ -39,7 +43,8 @@ implementation
 uses
   System.SysUtils, FireDAC.Stan.Param, FireDAC.Stan.Error, uModel.Repository.DataManager,
   uModel.Repository.StatementFactory, uModel.FireDACEngineException,
-  uModel.ConstsStatement;
+  uModel.ConstsStatement, uModel.Repository.RepositoryContext, uModel.Entities.VendaItem,
+  uModel.Repository.VendaItem;
 
 procedure TVendaRepository.AfterSave(Entity: TVenda);
 begin
@@ -64,17 +69,39 @@ begin
   end;
 end;
 
-function TVendaRepository.DeleteById(Id: Integer): Boolean;
+function TVendaRepository.DeleteById(Entity: TVenda): Boolean;
 var
   Statement: IStatement;
+  VendaItem: TVendaItem;
+  Itens: TObjectList<TVendaItem>;
+  VendaItemRepository: IRepository<TVendaItem>;
+  i: Integer;
 begin
   DataManager.StartTransaction;
   try
     Statement:= TStatementFactory.GetStatement(DataManager);
 
-    Statement.Query.SQL.Add(ctSQLVendaDelete);
-    Statement.Query.Params.ParamByName('idvenda').AsInteger:= Id;
+    try
+      VendaItem:= TVendaItem.Create;
+      VendaItem.IdVenda:= Entity.IdVenda;
+      VendaItemRepository:= TVendaItemRepository.Create;
 
+      Itens:= VendaItemRepository.FindAll(ctSQLVendaItemFindID, VendaItem);
+
+      Statement.Query.SQL.Add(ctSQLVendaItemDelete);
+      Statement.Query.Params.ParamByName('idvenda').AsInteger:= Entity.IdVenda;
+      for i:= 0 to Itens.Count -1 do
+        begin
+          Statement.Query.Params.ParamByName('item').AsInteger:= Itens.Items[i].Item;
+          Statement.Query.ExecSQL;
+        end;
+
+    finally
+      FreeAndNil(VendaItem);
+    end;
+
+    Statement.Query.SQL.Add(ctSQLVendaDelete);
+    Statement.Query.Params.ParamByName('idvenda').AsInteger:= Entity.IdVenda;
     Statement.Query.ExecSQL;
     DataManager.Commit;
 
@@ -206,9 +233,17 @@ begin
   end;
 end;
 
-function TVendaRepository.FindExists(CommadSQL: String; Parameter: String; Entity: TVenda): Boolean;
+function TVendaRepository.FindExists(CommadSQL: String; Parameter: String;
+  ParameterType: TFieldType; Value: Variant): IStatement;
+var
+  RepositoryContext: TRepositoryContext;
 begin
-  Result:= False;
+  RepositoryContext:= TRepositoryContext.Create;
+  try
+    Result:= RepositoryContext.FindExists(CommadSQL, Parameter, ParameterType, Value);
+  finally
+    FreeAndNil(RepositoryContext);
+  end;
 end;
 
 function TVendaRepository.FindExists: Boolean;
@@ -222,8 +257,22 @@ begin
 end;
 
 function TVendaRepository.GeneratedValue: Integer;
+var
+  Statement: IStatement;
 begin
-  Result:= 0;
+  try
+    Statement:= TStatementFactory.GetStatement(DataManager);
+
+    Result:= Statement.SQL(ctNextValueVendas)
+      .Open
+        .Query.FieldByName('currentID').AsInteger;
+
+  except
+    on E: EFDDBEngineException do
+      begin
+        raise Exception.Create(TFireDACEngineException.GetMessage(E));
+      end;
+  end;
 end;
 
 function TVendaRepository.Last: TVenda;
@@ -329,6 +378,11 @@ begin
   end;
 end;
 
+procedure TVendaRepository.RemoverItens;
+begin
+
+end;
+
 function TVendaRepository.Save(Entity: TVenda): Boolean;
 var
   Statement: IStatement;
@@ -373,7 +427,7 @@ end;
 procedure TVendaRepository.SetStatement(Statement: IStatement; Entity: TVenda);
 begin
   try
-    Statement.Query.Params.ParamByName('idvenda').AsDateTime:= Entity.IdVenda;
+    Statement.Query.Params.ParamByName('idvenda').AsInteger:= Entity.IdVenda;
     Statement.Query.Params.ParamByName('dthr_venda').AsDateTime:= Entity.DataHoraVenda;
     Statement.Query.Params.ParamByName('idcliente').AsInteger:= Entity.Cliente.IdCliente;
     Statement.Query.Params.ParamByName('total').AsFloat:= Entity.Total;
@@ -382,6 +436,32 @@ begin
   except
     on E: EFDDBEngineException do
       raise Exception.Create(TFireDACEngineException.GetMessage(E));
+  end;
+end;
+
+function TVendaRepository.Update(CommandSQL, Parameter: String;
+  Entity: TVenda): Boolean;
+var
+  Statement: IStatement;
+begin
+  DataManager.StartTransaction;
+  try
+    Statement:= TStatementFactory.GetStatement(DataManager);
+
+    Statement.Query.SQL.Add(ctSQLToalVendaUpdate);
+    Statement.Query.Params.ParamByName('idvenda').AsInteger:= Entity.IdVenda;
+    Statement.Query.Params.ParamByName('total').AsFloat:= Entity.Total;
+
+    Statement.Query.ExecSQL;
+    DataManager.Commit;
+
+    Result:= Statement.Query.RowsAffected = ctRowsAffected;
+  except
+    on E: EFDDBEngineException do
+      begin
+        DataManager.Rollback;
+        raise Exception.Create(TFireDACEngineException.GetMessage(E));
+      end;
   end;
 end;
 
@@ -407,6 +487,12 @@ begin
         raise Exception.Create(TFireDACEngineException.GetMessage(E));
       end;
   end;
+end;
+
+function TVendaRepository.FindAll(CommadSQL: String;
+  Entity: TVenda): TObjectList<TVenda>;
+begin
+  Result:= nil;
 end;
 
 end.

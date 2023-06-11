@@ -24,13 +24,17 @@ const
 
   ctSQLClienteFindID =  ctSQLClientes + ctSQLClienteWhere;
 
-  ctSQLClienteFindExistsCpf = 'SELECT COUNT(*) OCORRENCIA FROM Clientes WHERE cpf = :cpf';
+  ctSQLClienteFindExistsCpf = 'SELECT idcliente FROM Clientes WHERE cpf = :cpf';
 
-  ctSQLFornecedorFindExistsCnpj = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE cnpj = :cnpj';
+  ctSQLClienteFindExists = 'SELECT idcliente FROM Clientes WHERE idcliente = :idcliente';
 
-  ctSQLFornecedorFindExistsInativo = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE idfornecedor = :idfornecedor and status = ''I''';
+  ctSQLClienteFindInativo = 'SELECT status FROM Clientes WHERE idcliente = :idcliente AND status = ''I''';
 
-  ctSQLFornecedorFindExistsIdFornecedor = 'SELECT COUNT(*) OCORRENCIA FROM Fornecedores WHERE idfornecedor = :idfornecedor';
+  ctSQLFornecedorFindExistsCnpj = 'SELECT idfornecedor FROM Fornecedores WHERE cnpj = :cnpj';
+
+  ctSQLFornecedorFindExistsInativo = 'SELECT status FROM Fornecedores WHERE idfornecedor = :idfornecedor and status = ''I''';
+
+  ctSQLFornecedorFindExistsIdFornecedor = 'SELECT idfornecedor FROM Fornecedores WHERE idfornecedor = :idfornecedor';
 
   ctSQLFornecedores = 'SELECT frn.idfornecedor, frn.nome_fantasia, frn.razao_social, frn.cnpj, frn.status FROM Fornecedores frn';
 
@@ -55,6 +59,8 @@ const
 
   ctSQLProdutoFindID = ctSQLProdutos + ctSQLProdutoWhere;
 
+  ctSQLProdutoFindInativo = 'SELECT status FROM Produtos WHERE idproduto = :idproduto AND status = ''I''';
+
   ctNextValueProdutos = 'SELECT NEXT VALUE FOR SEQ_PRODUTOS AS currentID';
 
   ctSQLProdutoInsert = 'INSERT INTO Produtos(idproduto, descricao, idfornecedor, preco_unitario, status)' +
@@ -72,18 +78,26 @@ const
                 ' FROM' +
                 '   vendas ven INNER JOIN clientes cli ON(ven.idcliente = cli.idcliente)';
 
-  ctSQLVendaWhere = ' WHERE idvenda = :idvenda ';
+  ctSQLVendaWhere = ' WHERE idvenda = :idvenda';
+
+  ctNextValueVendas = 'SELECT NEXT VALUE FOR SEQ_VENDAS AS currentID';
+
+  ctSQLVendaFindEfetivada = 'SELECT status FROM vendas WHERE idvenda = :idvenda AND status = ''E''';
 
   ctSQLVendaInsert = 'INSERT INTO vendas(idvenda, dthr_venda, idcliente, total, status)' +
                      ' VALUES(:idvenda, :dthr_venda, :idcliente, :total, :status)';
 
   ctSQLVendaUpdate = 'UPDATE vendas ' +
-                   '   SET dthr_venda = :dthr_venda, idcliente = :idcliente, total = :total, status = status '+
+                   '   SET dthr_venda = :dthr_venda, idcliente = :idcliente, total = :total, status = :status '+
                    ctSQLVendaWhere;
+
+  ctSQLToalVendaUpdate = 'UPDATE vendas ' +
+                         '   SET total = :total'+
+                         ctSQLVendaWhere;
 
   ctSQLVendaFindID =  ctSQLVendas + ctSQLVendaWhere;
 
-  ctSQLVendaDelete = 'DELETE FROM vendas ' +
+  ctSQLVendaDelete = 'DELETE FROM vendas' +
                     ctSQLVendaWhere;
 
   ctSQLVendaLastOrderBy = ' ORDER BY idvenda DESC';
@@ -101,6 +115,32 @@ const
   ctSQLVendaNext = ctSQLVendaOne + ctSQLVendaWhere;
 
   ctSQLVendaPrevious = ctSQLVendaOne + ctSQLVendaWhere;
+
+  ctSQLVendaItens = 'SELECT VEI.idvenda, VEI.item, VEI.idproduto, PRO.descricao, VEI.quantidade, VEI.preco_unitario, VEI.total'+
+                    '  FROM vendaitens VEI' +
+                    '  JOIN Produtos PRO ON(VEI.idproduto=PRO.idproduto)';
+
+
+  ctSQLVendaItemFirstOrderBy = ' ORDER BY VEI.idvenda, VEI.item ASC';
+
+  ctSQLVendaItemOne = 'SELECT TOP 1 VEI.idvenda, VEI.item, VEI.idproduto, VEI.descricao, VEI.quantidade, VEI.preco_unitario, VEI.total'+
+                       ' FROM vendas VEI' +
+                       ' JOIN Produtos PRO ON(VEI.idproduto=PRO.idproduto)';
+
+  ctSQLVendaItemFrist = ctSQLVendaItemOne + ctSQLVendaItemFirstOrderBy;
+
+  ctSQLVendaItemWhere = ' WHERE VEI.idvenda=:idvenda'; // AND VEI.item=item';
+
+  ctSQLVendaItemFindID = ctSQLVendaItens + ctSQLVendaItemWhere;
+
+  ctSQLVendaItemInsert = 'INSERT INTO vendaitens(idvenda, item, idproduto, quantidade, preco_unitario, total)' +
+                     ' VALUES(:idvenda, :item, :idproduto, :quantidade, :preco_unitario, :total)';
+
+  ctSQLVendaItemUpdate = 'UPDATE vendaitens' +
+                         '   SET idvenda = :idvenda, item = :item, idproduto = :idproduto, quantidade = :quantidade, preco_unitario = :preco_unitario, total = :total' +
+                         ' WHERE idvenda=:idvenda AND item=:item';
+
+  ctSQLVendaItemDelete = 'DELETE FROM vendaitens WHERE idvenda=:idvenda AND item=:item';
 
 implementation
 

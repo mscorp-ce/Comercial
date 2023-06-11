@@ -1,39 +1,32 @@
 inherited frmConsultaVenda: TfrmConsultaVenda
   Caption = 'Consulta de Vendas'
+  ExplicitWidth = 786
+  ExplicitHeight = 446
   PixelsPerInch = 96
   TextHeight = 13
   inherited grdConsulta: TDBGrid
-    OnDrawColumnCell = grdConsultaDrawColumnCell
     OnKeyDown = grdConsultaKeyDown
   end
   inherited cdsConsulta: TClientDataSet
     object cdsConsultaidvenda: TIntegerField
       FieldName = 'idvenda'
     end
-    object cdsConsultadtvenda: TDateField
-      FieldName = 'dtvenda'
+    object cdsConsultadthr_venda: TDateTimeField
+      FieldName = 'dthr_venda'
     end
-    object cdsConsultacliente: TStringField
-      FieldName = 'cliente'
+    object cdsConsultaidcliente: TIntegerField
+      FieldName = 'idcliente'
     end
-    object cdsConsultavendedor: TStringField
-      FieldName = 'vendedor'
-    end
-    object cdsConsultaobservacao: TStringField
-      FieldName = 'observacao'
-    end
-    object cdsConsultaobservacao_entrega: TMemoField
-      FieldName = 'observacao_entrega'
-      BlobType = ftMemo
-    end
-    object cdsConsultasubtotal: TFloatField
-      FieldName = 'subtotal'
-    end
-    object cdsConsultadesconto: TFloatField
-      FieldName = 'desconto'
+    object cdsConsultanome_cliente: TStringField
+      FieldName = 'nome_cliente'
+      Size = 50
     end
     object cdsConsultatotal: TFloatField
       FieldName = 'total'
+    end
+    object cdsConsultastatus: TStringField
+      FieldName = 'status'
+      Size = 1
     end
   end
 end

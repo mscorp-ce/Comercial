@@ -4,7 +4,7 @@ interface
 
 uses
   System.Classes, System.Generics.Collections, uModel.Abstraction, uModel.Entities.Cliente,
-  uModel.Services.Venda;
+  uModel.Services.Venda, Data.DB;
 
 type
   TControllerCliente = class(TInterfacedObject, IController<TCliente>)
@@ -14,13 +14,15 @@ type
     function GeneratedValue: Integer;
     function Fields: TStrings;
     function Save(Entity: TCliente): Boolean;
-    function Update(Id: Integer; Entity: TCliente): Boolean;
-    function DeleteById(Id: Integer): Boolean;
+    function Update(Entity: TCliente): Boolean; overload;
+    function Update(CommandSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function DeleteById(Entity: TCliente): Boolean;
     function FindById(Id: Integer): TCliente;
     function FindExists: Boolean; overload;
-    function FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean; overload;
+    function FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement; overload;
     function FindAll: TObjectList<TCliente>; overload;
     function FindAll(CommadSQL: String): TObjectList<TCliente>; overload;
+    function FindAll(CommadSQL: String; Entity: TCliente): TObjectList<TCliente>; overload;
     function Frist: TCliente;
     function Previous(Id: Integer): TCliente;
     function Next(Id: Integer): TCliente;
@@ -42,9 +44,9 @@ begin
   ClienteService:= TClienteService.Create;
 end;
 
-function TControllerCliente.DeleteById(Id: Integer): Boolean;
+function TControllerCliente.DeleteById(Entity: TCliente): Boolean;
 begin
-  Result:= ClienteService.DeleteById(Id);
+  Result:= ClienteService.DeleteById(Entity);
 end;
 
 destructor TControllerCliente.Destroy;
@@ -72,9 +74,9 @@ begin
   Result:= ClienteService.FindById(Id);
 end;
 
-function TControllerCliente.FindExists(CommadSQL: String; Parameter: String; Entity: TCliente): Boolean;
+function TControllerCliente.FindExists(CommadSQL: String; Parameter: String; ParameterType: TFieldType; Value: Variant): IStatement;
 begin
-  Result:= ClienteService.FindExists(CommadSQL, Parameter, Entity);
+  Result:= ClienteService.FindExists(CommadSQL, Parameter, ParameterType, Value);
 end;
 
 function TControllerCliente.FindExists: Boolean;
@@ -112,9 +114,21 @@ begin
   Result:= ClienteService.Save(Entity);
 end;
 
-function TControllerCliente.Update(Id: Integer; Entity: TCliente): Boolean;
+function TControllerCliente.Update(CommandSQL, Parameter: String;
+  Entity: TCliente): Boolean;
 begin
-  Result:= ClienteService.Update(Id, Entity);
+  Result:= False;
+end;
+
+function TControllerCliente.Update(Entity: TCliente): Boolean;
+begin
+  Result:= ClienteService.Update(Entity);
+end;
+
+function TControllerCliente.FindAll(CommadSQL: String;
+  Entity: TCliente): TObjectList<TCliente>;
+begin
+  Result:= nil;
 end;
 
 end.
