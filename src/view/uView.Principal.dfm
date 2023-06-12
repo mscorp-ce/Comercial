@@ -76,4 +76,8 @@ object frmPrincipal: TfrmPrincipal
       end
     end
   end
+  object EurekaLog1: TEurekaLog
+    Left = 136
+    Top = 64
+  end
 end

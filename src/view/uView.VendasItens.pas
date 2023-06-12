@@ -210,7 +210,7 @@ begin
         HabilitarControles([True, False])
     end
   else
-    HabilitarControles([False, True]);
+    HabilitarControles([True, True]);
 
   ProdutoContext:= TProdutoContext.Create;
   try
@@ -257,7 +257,8 @@ begin
   else
     begin
       SetPrecoUnitario;
-      edtQauntidade.SetFocus;
+      if pnlAtributes.Enabled then
+        edtQauntidade.SetFocus;
     end;
 end;
 

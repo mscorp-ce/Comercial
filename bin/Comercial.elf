@@ -6372,3 +6372,643 @@ Stack:               Memory Dump:
 
 
 
+EurekaLog 6.1.05 RC 3
+
+Application:
+-------------------------------------------------------
+  1.1 Start Date      : Sun, 11 Jun 2023 22:10:09 -0300
+  1.2 Name/Description: Comercial.exe - (Comercial)
+  1.3 Version Number  : 1.0.0.0
+  1.4 Parameters      : 
+  1.5 Compilation Date: Sun, 11 Jun 2023 22:10:05 -0300
+  1.6 Up Time         : 20 seconds
+
+Exception:
+------------------------------------------------------------------
+  2.1 Date          : Sun, 11 Jun 2023 22:10:30 -0300
+  2.2 Address       : 006A32CE
+  2.3 Module Name   : Comercial.exe - (Comercial)
+  2.4 Module Version: 1.0.0.0
+  2.5 Type          : EInvalidOperation
+  2.6 Message       : Cannot focus a disabled or invisible window.
+  2.7 ID            : 50F8
+  2.8 Count         : 1
+  2.9 Status        : New
+  2.10 Note         : 
+
+User:
+-------------------------------------------------------
+  3.1 ID        : Marcio
+  3.2 Name      : Marcio
+  3.3 Email     : 
+  3.4 Company   : 
+  3.5 Privileges: SeShutdownPrivilege             - OFF
+                  SeChangeNotifyPrivilege         - ON
+                  SeUndockPrivilege               - OFF
+                  SeIncreaseWorkingSetPrivilege   - OFF
+                  SeTimeZonePrivilege             - OFF
+
+Active Controls:
+------------------------------------
+  4.1 Form Class   : TfrmVendasItens
+  4.2 Form Text    : VendaItens
+  4.3 Control Class: TfrmVendasItens
+  4.4 Control Text : 
+
+Computer:
+------------------------------------------------------------------------------------
+  5.1 Name          : DESKTOP-BSB582O
+  5.2 Total Memory  : 8102 Mb
+  5.3 Free Memory   : 2068 Mb
+  5.4 Total Disk    : 222,95 Gb
+  5.5 Free Disk     : 84,98 Gb
+  5.6 System Up Time: 2 days, 13 hours, 23 minutes, 34 seconds
+  5.7 Processor     : Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
+  5.8 Display Mode  : 1366 x 768, 32 bit
+  5.9 Display DPI   : 96
+  5.10 Video Card   : Intel(R) HD Graphics 5500 (driver 20.19.15.4835 - RAM 1024 MB)
+  5.11 Printer      : Microsoft Print To PDF (driver 10.0.19041.2788)
+
+Operating System:
+-----------------------------------------------
+  6.1 Type    : Microsoft Windows 10.0 (64 bit)
+  6.2 Build # : 19041
+  6.3 Update  : 
+  6.4 Language: Portuguese
+  6.5 Charset : 0
+
+Network:
+---------------------------------------------------------------------------------------
+  7.1 IP Address: 000.000.000.000 - 192.168.000.028 - 000.000.000.000 - 000.000.000.000
+  7.2 Submask   : 000.000.000.000 - 255.255.255.000 - 000.000.000.000 - 000.000.000.000
+  7.3 Gateway   : 000.000.000.000 - 192.168.000.001 - 000.000.000.000 - 000.000.000.000
+  7.4 DNS 1     : 000.000.000.000 - 181.213.132.002 - 000.000.000.000 - 000.000.000.000
+  7.5 DNS 2     : 000.000.000.000 - 181.213.132.003 - 000.000.000.000 - 000.000.000.000
+  7.6 DHCP      : ON              - ON              - ON              - ON             
+
+Call Stack Information:
+------------------------------------------------------------------------------------------------------------------------------------
+|Address |Module       |Unit                        |Class                      |Procedure/Method                       |Line      |
+------------------------------------------------------------------------------------------------------------------------------------
+|*Exception Thread: ID=13172; Priority=0; Class=; [Main]                                                                           |
+|----------------------------------------------------------------------------------------------------------------------------------|
+|006A32CE|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetActiveControl                       |5843[6]   |
+|006A3260|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetActiveControl                       |5837[0]   |
+|006A33D7|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |FocusControl                           |5884[8]   |
+|006A3384|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |FocusControl                           |5876[0]   |
+|005C9B42|Comercial.exe|Vcl.Controls.pas            |TWinControl                |SetFocus                               |12252[3]  |
+|0093A394|Comercial.exe|uView.VendasItens.pas       |TfrmVendasItens            |lcbProdutoExit                         |260[9]    |
+|005C8032|Comercial.exe|Vcl.Controls.pas            |TWinControl                |DoExit                                 |10912[1]  |
+|00409090|Comercial.exe|System.pas                  |                           |_CallDynaInst                          |17573[1]  |
+|005C8C59|Comercial.exe|Vcl.Controls.pas            |TWinControl                |CMExit                                 |11536[2]  |
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|005C1D30|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7235[0]   |
+|005C6B55|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10160[158]|
+|005C656C|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10002[0]  |
+|006A0F5D|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |WndProc                                |4545[209] |
+|005C6174|Comercial.exe|Vcl.Controls.pas            |TWinControl                |MainWndProc                            |9867[3]   |
+|004D5684|Comercial.exe|System.Classes.pas          |                           |StdWndProc                             |17360[8]  |
+|76B0151A|win32u.dll   |                            |                           |NtUserSetFocus                         |          |
+|75372930|user32.dll   |                            |                           |AddVisualIdentifier                    |          |
+|006A36E1|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetWindowFocus                         |5986[10]  |
+|006A3694|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetWindowFocus                         |5976[0]   |
+|006A32EA|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetActiveControl                       |5847[10]  |
+|006A3260|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |SetActiveControl                       |5837[0]   |
+|006A3378|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |DefocusControl                         |5869[3]   |
+|006A333C|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |DefocusControl                         |5866[0]   |
+|005C5043|Comercial.exe|Vcl.Controls.pas            |TWinControl                |RemoveFocus                            |9139[2]   |
+|005C502C|Comercial.exe|Vcl.Controls.pas            |TWinControl                |RemoveFocus                            |9137[0]   |
+|005C8D30|Comercial.exe|Vcl.Controls.pas            |TWinControl                |CMEnabledChanged                       |11622[1]  |
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|005C1D30|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7235[0]   |
+|005C6B55|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10160[158]|
+|005C1C28|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7104[10]  |
+|005C1C04|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7094[0]   |
+|005C0611|Comercial.exe|Vcl.Controls.pas            |TControl                   |SetEnabled                             |6148[4]   |
+|00939D4D|Comercial.exe|uView.VendasItens.pas       |TfrmVendasItens            |AddItens                               |162[22]   |
+|00939AE8|Comercial.exe|uView.VendasItens.pas       |TfrmVendasItens            |AddItens                               |140[0]    |
+|0093A69D|Comercial.exe|uView.VendasItens.pas       |TfrmVendasItens            |spbOKClick                             |321[3]    |
+|005C255C|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7442[9]   |
+|005C24E8|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7433[0]   |
+|0072278C|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |Click                                  |1550[1]   |
+|00722776|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |MouseUp                                |1543[25]  |
+|00409090|Comercial.exe|System.pas                  |                           |_CallDynaInst                          |17573[1]  |
+|005C2994|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7570[3]   |
+|005C295C|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7568[1]   |
+|005C2A16|Comercial.exe|Vcl.Controls.pas            |TControl                   |WMLButtonUp                            |7583[9]   |
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|77158290|ntdll.dll    |                            |                           |NtdllDefWindowProc_A                   |          |
+|7710E7D0|ntdll.dll    |                            |                           |RtlLeaveCriticalSection                |          |
+|005C1C28|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7104[10]  |
+|005C1C04|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7094[0]   |
+|005C6400|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9937[15]  |
+|005C6350|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9922[0]   |
+|005C69B6|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10106[104]|
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|005C6174|Comercial.exe|Vcl.Controls.pas            |TWinControl                |MainWndProc                            |9867[3]   |
+|004D5684|Comercial.exe|System.Classes.pas          |                           |StdWndProc                             |17360[8]  |
+|77142ABA|ntdll.dll    |                            |                           |NtCallbackReturn                       |          |
+|006AA8FB|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10607[23] |
+|006AA808|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10584[0]  |
+|006AA93E|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10637[1]  |
+|006AA934|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10636[0]  |
+|006A5CFA|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |ShowModal                              |7359[33]  |
+|0093D1AE|Comercial.exe|uView.Vendas.pas            |TfrmVenda                  |UpdateItem                             |328[10]   |
+|0093D10C|Comercial.exe|uView.Vendas.pas            |TfrmVenda                  |UpdateItem                             |318[0]    |
+|0093CB0F|Comercial.exe|uView.Vendas.pas            |TfrmVenda                  |spbAlterarClick                        |239[3]    |
+|005C255C|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7442[9]   |
+|005C24E8|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7433[0]   |
+|0072278C|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |Click                                  |1550[1]   |
+|00722776|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |MouseUp                                |1543[25]  |
+|00409090|Comercial.exe|System.pas                  |                           |_CallDynaInst                          |17573[1]  |
+|005C2994|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7570[3]   |
+|005C295C|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7568[1]   |
+|005C2A16|Comercial.exe|Vcl.Controls.pas            |TControl                   |WMLButtonUp                            |7583[9]   |
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|77158290|ntdll.dll    |                            |                           |NtdllDefWindowProc_A                   |          |
+|7710E7D0|ntdll.dll    |                            |                           |RtlLeaveCriticalSection                |          |
+|005C1C28|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7104[10]  |
+|005C1C04|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7094[0]   |
+|005C6400|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9937[15]  |
+|005C6350|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9922[0]   |
+|005C69B6|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10106[104]|
+|005C6174|Comercial.exe|Vcl.Controls.pas            |TWinControl                |MainWndProc                            |9867[3]   |
+|004D5684|Comercial.exe|System.Classes.pas          |                           |StdWndProc                             |17360[8]  |
+|77142ABA|ntdll.dll    |                            |                           |NtCallbackReturn                       |          |
+|006AA8FB|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10607[23] |
+|006AA808|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10584[0]  |
+|006AA93E|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10637[1]  |
+|006AA934|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10636[0]  |
+|006A5CFA|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |ShowModal                              |7359[33]  |
+|0093EDDB|Comercial.exe|uView.FormConsulta.Venda.pas|TfrmConsultaVenda          |ExecuteFrom                            |196[5]    |
+|0093ED94|Comercial.exe|uView.FormConsulta.Venda.pas|TfrmConsultaVenda          |ExecuteFrom                            |191[0]    |
+|0093E414|Comercial.exe|uView.FormConsulta.Venda.pas|TfrmConsultaVenda          |Change                                 |92[19]    |
+|007B46CA|Comercial.exe|uView.FormConsulta.pas      |TfrmConsulta               |spbAlterarClick                        |56[1]     |
+|005C255C|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7442[9]   |
+|005C24E8|Comercial.exe|Vcl.Controls.pas            |TControl                   |Click                                  |7433[0]   |
+|0072278C|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |Click                                  |1550[1]   |
+|00722776|Comercial.exe|Vcl.Buttons.pas             |TSpeedButton               |MouseUp                                |1543[25]  |
+|00409090|Comercial.exe|System.pas                  |                           |_CallDynaInst                          |17573[1]  |
+|005C2994|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7570[3]   |
+|005C295C|Comercial.exe|Vcl.Controls.pas            |TControl                   |DoMouseUp                              |7568[1]   |
+|005C2A16|Comercial.exe|Vcl.Controls.pas            |TControl                   |WMLButtonUp                            |7583[9]   |
+|005C1FEE|Comercial.exe|Vcl.Controls.pas            |TControl                   |WndProc                                |7326[91]  |
+|77158290|ntdll.dll    |                            |                           |NtdllDefWindowProc_A                   |          |
+|7710E7D0|ntdll.dll    |                            |                           |RtlLeaveCriticalSection                |          |
+|005C1C28|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7104[10]  |
+|005C1C04|Comercial.exe|Vcl.Controls.pas            |TControl                   |Perform                                |7094[0]   |
+|005C6400|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9937[15]  |
+|005C6350|Comercial.exe|Vcl.Controls.pas            |TWinControl                |IsControlMouseMsg                      |9922[0]   |
+|005C69B6|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10106[104]|
+|005C6174|Comercial.exe|Vcl.Controls.pas            |TWinControl                |MainWndProc                            |9867[3]   |
+|004D5684|Comercial.exe|System.Classes.pas          |                           |StdWndProc                             |17360[8]  |
+|75365E9B|user32.dll   |                            |                           |DispatchMessageW                       |          |
+|75365E90|user32.dll   |                            |                           |DispatchMessageW                       |          |
+|006AA8FB|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10607[23] |
+|006AA808|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10584[0]  |
+|006AA93E|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10637[1]  |
+|006AA934|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10636[0]  |
+|006A5CFA|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |ShowModal                              |7359[33]  |
+|009DAF9E|Comercial.exe|QuickRpt.pas                |                           |SetQRColorScheme                       |7143[8]   |
+|0068FCFB|Comercial.exe|Vcl.Menus.pas               |TMenuItem                  |Click                                  |2541[19]  |
+|00691444|Comercial.exe|Vcl.Menus.pas               |TMenu                      |DispatchCommand                        |3482[5]   |
+|0069142C|Comercial.exe|Vcl.Menus.pas               |TMenu                      |DispatchCommand                        |3477[0]   |
+|006B1F8D|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.TrackMenuFromItem|14689[26] |
+|006B1E6C|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.TrackMenuFromItem|14663[0]  |
+|006AF6AE|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.ProcessMenuLoop  |13457[7]  |
+|006AF68C|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.ProcessMenuLoop  |13450[0]  |
+|006AF554|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.MenuEnter        |13395[6]  |
+|006AF528|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.MenuEnter        |13389[0]  |
+|006B1AA0|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.MouseDown        |14547[4]  |
+|006B1A7C|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |TMainMenuBarStyleHook.MouseDown        |14543[0]  |
+|006B5948|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |WMNCLButtonDown                        |16396[41] |
+|00657C9F|Comercial.exe|Vcl.Themes.pas              |TStyleHook                 |WndProc                                |7208[13]  |
+|00657C24|Comercial.exe|Vcl.Themes.pas              |TStyleHook                 |WndProc                                |7195[0]   |
+|00657E94|Comercial.exe|Vcl.Themes.pas              |TMouseTrackControlStyleHook|WndProc                                |7316[1]   |
+|006B56C2|Comercial.exe|Vcl.Forms.pas               |TFormStyleHook             |WndProc                                |16266[2]  |
+|00657614|Comercial.exe|Vcl.Themes.pas              |TStyleHook                 |HandleMessage                          |6962[20]  |
+|007142C6|Comercial.exe|Vcl.Styles.pas              |TStyleEngine               |HandleMessage                          |3520[22]  |
+|006548C4|Comercial.exe|Vcl.Themes.pas              |TStyleManager              |HandleMessage                          |5536[11]  |
+|00654870|Comercial.exe|Vcl.Themes.pas              |TStyleManager              |HandleMessage                          |5525[0]   |
+|005C4EC7|Comercial.exe|Vcl.Controls.pas            |TWinControl                |DoHandleStyleMessage                   |9091[1]   |
+|00409090|Comercial.exe|System.pas                  |                           |_CallDynaInst                          |17573[1]  |
+|005C65C7|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10003[1]  |
+|005C656C|Comercial.exe|Vcl.Controls.pas            |TWinControl                |WndProc                                |10002[0]  |
+|006A0F5D|Comercial.exe|Vcl.Forms.pas               |TCustomForm                |WndProc                                |4545[209] |
+|005C6174|Comercial.exe|Vcl.Controls.pas            |TWinControl                |MainWndProc                            |9867[3]   |
+|004D5684|Comercial.exe|System.Classes.pas          |                           |StdWndProc                             |17360[8]  |
+|77142ABA|ntdll.dll    |                            |                           |NtCallbackReturn                       |          |
+|76B010EA|win32u.dll   |                            |                           |NtUserGetProp                          |          |
+|7536C6D9|user32.dll   |                            |                           |GetPropW                               |          |
+|75365E9B|user32.dll   |                            |                           |DispatchMessageW                       |          |
+|75365E90|user32.dll   |                            |                           |DispatchMessageW                       |          |
+|006AA8FB|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10607[23] |
+|006AA808|Comercial.exe|Vcl.Forms.pas               |TApplication               |ProcessMessage                         |10584[0]  |
+|006AA93E|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10637[1]  |
+|006AA934|Comercial.exe|Vcl.Forms.pas               |TApplication               |HandleMessage                          |10636[0]  |
+|006AAC71|Comercial.exe|Vcl.Forms.pas               |TApplication               |Run                                    |10775[26] |
+|006AABA8|Comercial.exe|Vcl.Forms.pas               |TApplication               |Run                                    |10749[0]  |
+|009EB8F2|Comercial.exe|Comercial.dpr               |                           |                                       |79[6]     |
+|751800C7|KERNEL32.DLL |                            |                           |BaseThreadInitThunk                    |          |
+------------------------------------------------------------------------------------------------------------------------------------
+
+Modules Information:
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|Handle  |Name                  |Description                                                |Version         |Size    |Modified           |Path                                                                                                         |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|00400000|Comercial.exe         |Comercial                                                  |1.0.0.0         |26658169|2023-06-11 22:10:04|C:\Dev\proj\Montreal\bin                                                                                     |
+|39670000|SQLNCLIR11.RLL        |Microsoft SQL Server Native Client 11.0                    |2011.110.2100.60|256600  |2012-02-11 10:02:40|C:\WINDOWS\System32\1046                                                                                     |
+|46480000|security.dll          |Security Support Provider Interface                        |10.0.19041.1    |5120    |2019-12-07 06:09:32|C:\WINDOWS\system32                                                                                          |
+|4DAE0000|midas.dll             |Embarcadero MIDAS Component Package                        |25.0.26309.314  |438736  |2017-03-20 19:55:00|C:\Program Files (x86)\Embarcadero\Studio\19.0\bin                                                           |
+|51FF0000|MSVCR100.dll          |Microsoft® C Runtime Library                               |10.0.40219.1    |773968  |2011-02-19 00:40:50|C:\WINDOWS\System32                                                                                          |
+|530A0000|sqlncli11.dll         |Microsoft SQL Server Native Client 11.0                    |2011.110.7001.0 |3007680 |2017-08-15 20:26:16|C:\WINDOWS\System32                                                                                          |
+|54300000|CLUSAPI.DLL           |Biblioteca API de Clusters                                 |10.0.19041.1949 |822272  |2023-05-01 08:42:58|C:\WINDOWS\system32                                                                                          |
+|549C0000|RESUTILS.DLL          |DLL do Utilitário de Recursos de Cluster da Microsoft      |10.0.19041.1949 |481792  |2023-05-01 08:42:58|C:\WINDOWS\system32                                                                                          |
+|55250000|ntdsapi.dll           |Active Directory Domain Services API                       |10.0.19041.2486 |97792   |2023-05-01 08:41:42|C:\WINDOWS\system32                                                                                          |
+|55270000|LOGONCLI.DLL          |Net Logon Client DLL                                       |10.0.19041.2193 |195240  |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|56F80000|odbc32.dll            |ODBC Driver Manager                                        |10.0.19041.1741 |604160  |2023-05-01 08:43:06|C:\WINDOWS\SYSTEM32                                                                                          |
+|572E0000|Kerberos.DLL          |Pacote de Segurança Kerberos                               |10.0.19041.2913 |837632  |2023-05-09 19:57:34|C:\WINDOWS\System32                                                                                          |
+|58B50000|SHFolder.dll          |Shell Folder Service                                       |10.0.19041.1    |8704    |2019-12-07 06:09:34|C:\WINDOWS\SYSTEM32                                                                                          |
+|58B90000|msv1_0.DLL            |Microsoft Authentication Package v1.0                      |10.0.19041.2965 |449880  |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|599F0000|cryptdll.dll          |Cryptography Manager                                       |10.0.19041.546  |56312   |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|5D820000|NtlmShared.dll        |NTLM Shared Functionality                                  |10.0.19041.2846 |54296   |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|5D830000|odbccp32.dll          |ODBC Installer                                             |10.0.19041.1    |109056  |2019-12-07 06:10:04|C:\WINDOWS\SYSTEM32                                                                                          |
+|5E0B0000|netbios.dll           |NetBIOS Interface Library                                  |10.0.19041.1    |15360   |2019-12-07 06:09:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|6FB60000|DWMAPI.DLL            |API do Gerenciador de Janelas da Área de Trabalho Microsoft|10.0.19041.746  |138936  |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|70C40000|WINSTA.dll            |Winstation Library                                         |10.0.19041.2075 |300624  |2023-05-01 08:41:42|C:\WINDOWS\SYSTEM32                                                                                          |
+|71030000|winspool.drv          |Driver de spooler do Windows                               |10.0.19041.2788 |451072  |2023-05-01 08:41:36|C:\WINDOWS\SYSTEM32                                                                                          |
+|714F0000|wtsapi32.dll          |Windows Remote Desktop Session Host Server SDK APIs        |10.0.19041.546  |52664   |2021-04-09 10:49:20|C:\WINDOWS\SYSTEM32                                                                                          |
+|72270000|DSPARSE.DLL           |Active Directory Domain Services API                       |10.0.19041.2486 |23040   |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|72710000|CoreMessaging.dll     |Microsoft CoreMessaging Dll                                |10.0.19041.2193 |631648  |2023-05-01 08:42:06|C:\WINDOWS\SYSTEM32                                                                                          |
+|727B0000|CoreUIComponents.dll  |Microsoft Core UI Components Dll                           |10.0.19041.546  |2621720 |2021-04-09 10:49:24|C:\WINDOWS\SYSTEM32                                                                                          |
+|72A30000|textinputframework.dll|"TextInputFramework.DYNLINK"                               |10.0.19041.2913 |757256  |2023-05-09 19:57:34|C:\WINDOWS\SYSTEM32                                                                                          |
+|72D40000|TextShaping.dll       |                                                           |                |611960  |2023-05-01 08:41:50|C:\WINDOWS\SYSTEM32                                                                                          |
+|72FD0000|DPAPI.DLL             |Data Protection API                                        |10.0.19041.546  |13312   |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|72FF0000|mswsock.dll           |Provedor de serviços do Microsoft Windows Sockets 2.0      |10.0.19041.546  |324416  |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|73080000|uxtheme.dll           |Biblioteca UxTheme Microsoft                               |10.0.19041.2193 |454144  |2023-05-01 08:41:40|C:\WINDOWS\system32                                                                                          |
+|73100000|DNSAPI.dll            |DLL da API de cliente DNS                                  |10.0.19041.2546 |586776  |2023-05-01 08:42:06|C:\WINDOWS\SYSTEM32                                                                                          |
+|73770000|comctl32.dll          |Biblioteca de Controles de Experiência do Usuário          |6.10.19041.1110 |2152264 |2023-03-28 18:16:00|C:\WINDOWS\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_a8625c1886757984|
+|73C00000|olepro32.dll          |OLEPRO32.DLL                                               |10.0.19041.84   |88576   |2021-04-09 10:49:36|C:\WINDOWS\SYSTEM32                                                                                          |
+|73DD0000|secur32.dll           |Security Support Provider Interface                        |10.0.19041.546  |23040   |2021-04-09 10:49:36|C:\WINDOWS\system32                                                                                          |
+|73E00000|MSASN1.dll            |ASN.1 Runtime APIs                                         |10.0.19041.2251 |51664   |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|73E10000|CRYPTBASE.dll         |Base cryptographic API DLL                                 |10.0.19041.546  |31528   |2021-04-09 10:49:20|C:\WINDOWS\SYSTEM32                                                                                          |
+|73E20000|IPHLPAPI.DLL          |API de Auxiliar de IP                                      |10.0.19041.2788 |201440  |2023-05-01 08:42:06|C:\WINDOWS\SYSTEM32                                                                                          |
+|73E60000|msimg32.dll           |GDIEXT Client DLL                                          |10.0.19041.1466 |7168    |2023-05-01 08:42:10|C:\WINDOWS\SYSTEM32                                                                                          |
+|74030000|ntmarta.dll           |Provedor MARTA do Windows NT                               |10.0.19041.546  |152904  |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|74070000|version.dll           |Version Checking and File Installation Libraries           |10.0.19041.546  |27320   |2021-04-09 10:49:38|C:\WINDOWS\SYSTEM32                                                                                          |
+|74080000|netapi32.dll          |Net Win32 API DLL                                          |10.0.19041.2130 |73864   |2023-05-01 08:41:42|C:\WINDOWS\SYSTEM32                                                                                          |
+|741A0000|wsock32.dll           |Windows Socket 32-Bit DLL                                  |10.0.19041.1    |16384   |2019-12-07 06:09:16|C:\WINDOWS\SYSTEM32                                                                                          |
+|741B0000|schannel.dll          |Provedor de Segurança TLS/SSL                              |10.0.19041.2913 |494592  |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|74230000|wintypes.dll          |DLL dos Tipos de Base do Windows                           |10.0.19041.2788 |899208  |2023-05-01 08:42:06|C:\WINDOWS\SYSTEM32                                                                                          |
+|74330000|SspiCli.dll           |Security Support Provider Interface                        |10.0.19041.2130 |125056  |2023-05-01 08:41:36|C:\WINDOWS\SYSTEM32                                                                                          |
+|74360000|ncryptsslp.dll        |Microsoft SChannel Provider                                |10.0.19041.2846 |118296  |2023-05-01 08:42:08|C:\WINDOWS\system32                                                                                          |
+|74380000|ncrypt.dll            |Roteador NCrypt do Windows                                 |10.0.19041.2788 |135336  |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|743B0000|NTASN1.dll            |Microsoft ASN.1 API                                        |10.0.19041.546  |161608  |2021-04-09 10:49:32|C:\WINDOWS\SYSTEM32                                                                                          |
+|743E0000|mskeyprotect.dll      |Provedor de Proteção de Chave da Microsoft                 |10.0.19041.2788 |53760   |2023-05-01 08:42:02|C:\WINDOWS\SYSTEM32                                                                                          |
+|74400000|NETUTILS.DLL          |Net Win32 API Helpers DLL                                  |10.0.19041.1466 |38232   |2023-05-01 08:42:08|C:\WINDOWS\SYSTEM32                                                                                          |
+|74920000|kernel.appcore.dll    |AppModel API Host                                          |10.0.19041.546  |52672   |2021-04-09 10:49:28|C:\WINDOWS\SYSTEM32                                                                                          |
+|74F70000|comdlg32.dll          |DLL de diálogos comuns                                     |10.0.19041.1806 |688128  |2023-05-01 08:42:20|C:\WINDOWS\System32                                                                                          |
+|75020000|ole32.dll             |Microsoft OLE para Windows                                 |10.0.19041.2965 |927656  |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|75160000|KERNEL32.DLL          |DLL cliente da API BASE do Windows NT                      |10.0.19041.2913 |645968  |2023-05-09 19:57:34|C:\WINDOWS\System32                                                                                          |
+|75250000|sechost.dll           |Host for SCM/SDDL/LSA Lookup APIs                          |10.0.19041.2913 |477784  |2023-05-09 19:57:32|C:\WINDOWS\System32                                                                                          |
+|75330000|user32.dll            |DLL de cliente API de usuário Windows para multiusuários   |10.0.19041.2965 |1684280 |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|75560000|msvcrt.dll            |Windows NT CRT DLL                                         |7.0.19041.546   |775256  |2021-04-09 10:49:20|C:\WINDOWS\System32                                                                                          |
+|75620000|RPCRT4.dll            |Tempo de Execução da Chamada de Procedimento Remoto        |10.0.19041.2965 |781456  |2023-05-09 19:57:32|C:\WINDOWS\System32                                                                                          |
+|75700000|advapi32.dll          |API de base do Windows 32 avançada                         |10.0.19041.2913 |500512  |2023-05-09 19:57:32|C:\WINDOWS\System32                                                                                          |
+|75780000|IMM32.DLL             |Multi-User Windows IMM32 API Client DLL                    |10.0.19041.2673 |146888  |2023-05-01 08:42:10|C:\WINDOWS\System32                                                                                          |
+|757B0000|WS2_32.dll            |DLL de 32 bits do Windows Socket 2.0                       |10.0.19041.546  |397728  |2021-04-09 10:49:20|C:\WINDOWS\System32                                                                                          |
+|75820000|KERNELBASE.dll        |DLL cliente da API BASE do Windows NT                      |10.0.19041.2965 |2336136 |2023-05-09 19:57:26|C:\WINDOWS\System32                                                                                          |
+|75A60000|SHLWAPI.dll           |Biblioteca de utilitário abreviado para Shell              |10.0.19041.2075 |276840  |2023-05-01 08:42:20|C:\WINDOWS\System32                                                                                          |
+|75AB0000|bcrypt.dll            |Biblioteca de Primitivos Criptografados do Windows         |10.0.19041.2486 |97608   |2023-05-01 08:42:06|C:\WINDOWS\System32                                                                                          |
+|75AD0000|shcore.dll            |SHCORE                                                     |10.0.19041.1645 |545984  |2023-05-01 08:42:04|C:\WINDOWS\System32                                                                                          |
+|75B60000|NSI.dll               |NSI User-mode interface DLL                                |10.0.19041.610  |20144   |2021-04-09 10:49:08|C:\WINDOWS\System32                                                                                          |
+|75D40000|combase.dll           |Microsoft COM para Windows                                 |10.0.19041.2788 |2633112 |2023-05-01 08:42:06|C:\WINDOWS\System32                                                                                          |
+|76020000|msvcp_win.dll         |Microsoft® C Runtime Library                               |10.0.19041.789  |495840  |2021-04-09 10:49:32|C:\WINDOWS\System32                                                                                          |
+|76120000|CRYPT32.dll           |Crypto API32                                               |10.0.19041.2965 |1040200 |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|76220000|shell32.dll           |DLL comum do Shell do Windows                              |10.0.19041.2788 |6017784 |2023-05-01 08:42:20|C:\WINDOWS\System32                                                                                          |
+|767E0000|bcryptPrimitives.dll  |Windows Cryptographic Primitives Library                   |10.0.19041.2486 |384312  |2023-05-01 08:40:54|C:\WINDOWS\System32                                                                                          |
+|76840000|PSAPI.DLL             |Process Status Helper                                      |10.0.19041.546  |17016   |2021-04-09 10:49:32|C:\WINDOWS\System32                                                                                          |
+|76890000|Msctf.dll             |DLL de servidor MSCTF                                      |10.0.19041.2673 |863768  |2023-05-01 08:41:40|C:\WINDOWS\System32                                                                                          |
+|76970000|gdi32full.dll         |GDI Client DLL                                             |10.0.19041.2965 |929184  |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|76A60000|oleaut32.dll          |OLEAUT32.DLL                                               |10.0.19041.985  |606888  |2023-05-01 08:42:10|C:\WINDOWS\System32                                                                                          |
+|76B00000|win32u.dll            |Win32u                                                     |10.0.19041.2913 |94024   |2023-05-09 19:57:36|C:\WINDOWS\System32                                                                                          |
+|76B20000|ucrtbase.dll          |Microsoft® C Runtime Library                               |10.0.19041.789  |1181208 |2021-04-09 10:49:32|C:\WINDOWS\System32                                                                                          |
+|77090000|GDI32.dll             |GDI Client DLL                                             |10.0.19041.2913 |142016  |2023-05-09 19:57:34|C:\WINDOWS\System32                                                                                          |
+|770D0000|ntdll.dll             |DLL de nível do NT                                         |10.0.19041.2965 |1699912 |2023-05-09 19:57:32|C:\WINDOWS\SYSTEM32                                                                                          |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Processes Information:
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|ID   |Name                       |Description                              |Version        |Memory|Priority    |Threads|Path                                                                        |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|0    |[System Process]           |                                         |               |0     |            |4      |                                                                            |
+|4    |System                     |                                         |               |0     |Normal      |158    |                                                                            |
+|100  |Registry                   |                                         |               |0     |Normal      |4      |                                                                            |
+|368  |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|412  |smss.exe                   |                                         |               |0     |Above-Normal|2      |                                                                            |
+|440  |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|468  |fontdrvhost.exe            |Usermode Font Driver Host                |10.0.19041.2075|0     |Normal      |5      |                                                                            |
+|572  |csrss.exe                  |                                         |               |0     |High        |12     |                                                                            |
+|672  |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|676  |wininit.exe                |                                         |               |0     |High        |1      |                                                                            |
+|684  |csrss.exe                  |                                         |               |0     |High        |15     |                                                                            |
+|748  |services.exe               |                                         |               |0     |Normal      |9      |                                                                            |
+|756  |lsass.exe                  |                                         |               |0     |Normal      |9      |                                                                            |
+|808  |RuntimeBroker.exe          |                                         |               |0     |Normal      |5      |                                                                            |
+|820  |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|824  |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|880  |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |14     |                                                                            |
+|912  |fontdrvhost.exe            |Usermode Font Driver Host                |10.0.19041.2075|0     |Normal      |5      |                                                                            |
+|988  |winlogon.exe               |                                         |               |0     |High        |6      |                                                                            |
+|1044 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|1056 |dwm.exe                    |                                         |               |0     |High        |14     |                                                                            |
+|1076 |notepad.exe                |Bloco de notas                           |10.0.19041.1   |0     |Normal      |1      |                                                                            |
+|1124 |chrome.exe                 |                                         |               |0     |Low         |19     |                                                                            |
+|1132 |chrome.exe                 |                                         |               |0     |Normal      |47     |                                                                            |
+|1164 |CalculatorApp.exe          |                                         |               |0     |Normal      |22     |                                                                            |
+|1188 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|1240 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|1264 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|1292 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |11     |                                                                            |
+|1304 |SearchApp.exe              |                                         |               |0     |Normal      |32     |                                                                            |
+|1372 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |2      |                                                                            |
+|1384 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |2      |                                                                            |
+|1392 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|1396 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|1408 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|1452 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|1528 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |6      |                                                                            |
+|1656 |ConEmuC64.exe              |                                         |               |0     |Normal      |8      |                                                                            |
+|1708 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |2      |                                                                            |
+|1760 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|1812 |NVDisplay.Container.exe    |                                         |               |0     |Normal      |6      |                                                                            |
+|1828 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |6      |                                                                            |
+|1860 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|1880 |RuntimeBroker.exe          |                                         |               |0     |Normal      |1      |                                                                            |
+|1932 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|2028 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|2036 |StartMenuExperienceHost.exe|                                         |               |0     |Normal      |11     |                                                                            |
+|2040 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|2080 |LockApp.exe                |                                         |               |0     |Normal      |16     |                                                                            |
+|2100 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |2      |                                                                            |
+|2112 |Memory Compression         |                                         |               |0     |Normal      |42     |                                                                            |
+|2176 |NVDisplay.Container.exe    |                                         |               |0     |Normal      |15     |                                                                            |
+|2196 |igfxCUIService.exe         |                                         |               |0     |Normal      |6      |                                                                            |
+|2264 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |9      |                                                                            |
+|2272 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |2      |                                                                            |
+|2308 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|2460 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |17     |                                                                            |
+|2540 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |15     |                                                                            |
+|2660 |RtkAudioService64.exe      |                                         |               |0     |Normal      |2      |                                                                            |
+|2832 |sihost.exe                 |                                         |               |0     |Normal      |9      |                                                                            |
+|2856 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|2900 |PresentationFontCache.exe  |                                         |               |0     |Normal      |4      |                                                                            |
+|2928 |RAVBg64.exe                |                                         |               |0     |Normal      |5      |                                                                            |
+|2936 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|2948 |RAVBg64.exe                |                                         |               |0     |Normal      |5      |                                                                            |
+|2976 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|2988 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|3008 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|3024 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|3032 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|3124 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|3148 |taskhostw.exe              |                                         |               |0     |Normal      |9      |                                                                            |
+|3204 |ShellExperienceHost.exe    |                                         |               |0     |Normal      |22     |                                                                            |
+|3332 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|3360 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|3420 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|3468 |ctfmon.exe                 |Carregador CTF                           |10.0.19041.1   |0     |High        |9      |                                                                            |
+|3480 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|3524 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |11     |                                                                            |
+|3564 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |6      |                                                                            |
+|3608 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|3612 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |9      |                                                                            |
+|3716 |spoolsv.exe                |                                         |               |0     |Normal      |7      |                                                                            |
+|3768 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|3800 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |13     |                                                                            |
+|3896 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|3924 |WmiPrvSE.exe               |WMI Provider Host                        |10.0.19041.546 |0     |Normal      |9      |                                                                            |
+|3928 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|3952 |igfxEM.exe                 |                                         |               |0     |Normal      |4      |                                                                            |
+|3964 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|3996 |igfxHK.exe                 |                                         |               |0     |Normal      |2      |                                                                            |
+|4008 |igfxTray.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|4064 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|4148 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|4168 |BSQLServer.exe             |BlackfishSQL Server Launcher             |8.0.2902.10471 |0     |Normal      |4      |                                                                            |
+|4176 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|4192 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |14     |                                                                            |
+|4204 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|4212 |chrome.exe                 |                                         |               |0     |Low         |19     |                                                                            |
+|4216 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|4224 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |18     |                                                                            |
+|4332 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|4380 |pg_ctl.exe                 |                                         |               |0     |Normal      |2      |                                                                            |
+|4404 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|4412 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |6      |                                                                            |
+|4440 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|4468 |sqlwriter.exe              |                                         |               |0     |Normal      |2      |                                                                            |
+|4476 |mysqld.exe                 |                                         |               |0     |Normal      |3      |                                                                            |
+|4488 |WMIRegistrationService.exe |                                         |               |0     |Normal      |2      |                                                                            |
+|4496 |MsMpEng.exe                |                                         |               |0     |Normal      |28     |                                                                            |
+|4508 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|4584 |sqlservr.exe               |                                         |               |0     |Normal      |73     |                                                                            |
+|4592 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|4600 |sqlceip.exe                |                                         |               |0     |Below-Normal|15     |                                                                            |
+|4612 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|4628 |pgagent.exe                |                                         |               |0     |Normal      |2      |                                                                            |
+|4784 |jhi_service.exe            |                                         |               |0     |Normal      |2      |                                                                            |
+|5040 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |11     |                                                                            |
+|5104 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|5160 |mysqld.exe                 |                                         |               |0     |Normal      |39     |                                                                            |
+|5168 |conhost.exe                |                                         |               |0     |Normal      |4      |                                                                            |
+|5204 |postgres.exe               |                                         |               |0     |Normal      |3      |                                                                            |
+|5220 |conhost.exe                |                                         |               |0     |Normal      |4      |                                                                            |
+|5532 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|5596 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|5612 |postgres.exe               |                                         |               |0     |Normal      |3      |                                                                            |
+|5636 |postgres.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|5648 |postgres.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|5676 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|5844 |postgres.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|5852 |postgres.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|5860 |postgres.exe               |                                         |               |0     |Normal      |2      |                                                                            |
+|5868 |postgres.exe               |                                         |               |0     |Normal      |3      |                                                                            |
+|5876 |explorer.exe               |Windows Explorer                         |10.0.19041.2913|0     |Normal      |96     |                                                                            |
+|5932 |notepad++.exe              |                                         |               |0     |Normal      |2      |                                                                            |
+|5996 |RuntimeBroker.exe          |                                         |               |0     |Normal      |4      |                                                                            |
+|6224 |Ssms.exe                   |SSMS 19                                  |19.1.56.0      |0     |Normal      |35     |C:\Program Files (x86)\Microsoft SQL Server Management Studio 19\Common7\IDE|
+|6248 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|6280 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|6292 |dllhost.exe                |COM Surrogate                            |10.0.19041.546 |0     |Normal      |6      |                                                                            |
+|6428 |msedge.exe                 |                                         |               |0     |Normal      |7      |                                                                            |
+|6528 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|6536 |jucheck.exe                |Java Update Checker                      |2.8.60.27      |0     |Normal      |3      |C:\Program Files (x86)\Common Files\Java\Java Update                        |
+|6544 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|6644 |SearchIndexer.exe          |Indexador do Microsoft Windows Search    |7.0.19041.2673 |0     |Normal      |17     |                                                                            |
+|6864 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|7100 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|7196 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|7256 |notepad.exe                |Bloco de notas                           |10.0.19041.1   |0     |Normal      |1      |                                                                            |
+|7304 |RuntimeBroker.exe          |                                         |               |0     |Normal      |2      |                                                                            |
+|7312 |chrome.exe                 |                                         |               |0     |Low         |19     |                                                                            |
+|7328 |Video.UI.exe               |                                         |               |0     |Normal      |15     |                                                                            |
+|7492 |UserOOBEBroker.exe         |                                         |               |0     |Normal      |1      |                                                                            |
+|7520 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|7540 |SearchApp.exe              |                                         |               |0     |Normal      |35     |                                                                            |
+|7592 |cmd.exe                    |Processador de comandos do Windows       |10.0.19041.746 |0     |Normal      |3      |                                                                            |
+|7656 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|7672 |RuntimeBroker.exe          |                                         |               |0     |Normal      |12     |                                                                            |
+|7700 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|7744 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|8060 |GoogleCrashHandler64.exe   |                                         |               |0     |Low         |3      |                                                                            |
+|8348 |chrome.exe                 |                                         |               |0     |Low         |18     |                                                                            |
+|8380 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |3      |                                                                            |
+|8412 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|8524 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |8      |                                                                            |
+|8612 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|8756 |NisSrv.exe                 |                                         |               |0     |Normal      |10     |                                                                            |
+|8768 |PhoneExperienceHost.exe    |                                         |               |0     |Normal      |13     |                                                                            |
+|8804 |audiodg.exe                |                                         |               |0     |Normal      |3      |                                                                            |
+|8836 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|8900 |GoogleCrashHandler.exe     |                                         |               |0     |Low         |3      |                                                                            |
+|8908 |SgrmBroker.exe             |                                         |               |0     |Normal      |8      |                                                                            |
+|8960 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|9012 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |5      |                                                                            |
+|9044 |chrome.exe                 |                                         |               |0     |Low         |18     |                                                                            |
+|9340 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|9432 |RuntimeBroker.exe          |                                         |               |0     |Normal      |2      |                                                                            |
+|9632 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|9636 |chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|9644 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |7      |                                                                            |
+|9668 |svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |10     |                                                                            |
+|9812 |chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|9860 |SecurityHealthSystray.exe  |                                         |               |0     |Normal      |1      |                                                                            |
+|9896 |SecurityHealthService.exe  |                                         |               |0     |Normal      |7      |                                                                            |
+|9936 |chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|9960 |RtkNGUI64.exe              |                                         |               |0     |Normal      |8      |                                                                            |
+|10068|RAVBg64.exe                |                                         |               |0     |Below-Normal|5      |                                                                            |
+|10080|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|10132|RAVBg64.exe                |                                         |               |0     |Normal      |5      |                                                                            |
+|10196|OneDrive.exe               |                                         |               |0     |Normal      |25     |                                                                            |
+|10308|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|10320|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|10332|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |12     |                                                                            |
+|10412|ApplicationFrameHost.exe   |                                         |               |0     |Normal      |3      |                                                                            |
+|10504|msedge.exe                 |                                         |               |0     |Above-Normal|13     |                                                                            |
+|10616|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|10676|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |8      |                                                                            |
+|10736|sppsvc.exe                 |                                         |               |0     |Normal      |4      |                                                                            |
+|10788|chrome.exe                 |                                         |               |0     |Normal      |14     |                                                                            |
+|10796|RuntimeBroker.exe          |                                         |               |0     |Normal      |2      |                                                                            |
+|10824|SystemSettings.exe         |                                         |               |0     |Normal      |22     |                                                                            |
+|10840|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|10860|chrome.exe                 |                                         |               |0     |Normal      |12     |                                                                            |
+|10880|Microsoft.Photos.exe       |                                         |               |0     |Normal      |16     |                                                                            |
+|10884|chrome.exe                 |                                         |               |0     |Low         |21     |                                                                            |
+|10888|chrome.exe                 |                                         |               |0     |Normal      |10     |                                                                            |
+|10916|chrome.exe                 |                                         |               |0     |Low         |20     |                                                                            |
+|11004|TextInputHost.exe          |                                         |               |0     |Normal      |10     |                                                                            |
+|11144|chrome.exe                 |                                         |               |0     |Above-Normal|23     |                                                                            |
+|11188|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|11488|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|11492|plsqldev.exe               |PL/SQL Developer                         |11.0.4.1774    |0     |Normal      |4      |C:\Program Files (x86)\PLSQL Developer                                      |
+|11620|notepad.exe                |Bloco de notas                           |10.0.19041.1   |0     |Normal      |1      |                                                                            |
+|11708|chrome.exe                 |                                         |               |0     |Normal      |7      |                                                                            |
+|11808|jusched.exe                |Java Update Scheduler                    |2.8.60.27      |0     |Normal      |1      |C:\Program Files (x86)\Common Files\Java\Java Update                        |
+|11836|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|11944|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|12200|Comercial.exe              |Comercial                                |1.0.0.0        |0     |Normal      |8      |C:\Dev\proj\Montreal\bin                                                    |
+|12212|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |1      |                                                                            |
+|12228|RuntimeBroker.exe          |                                         |               |0     |Normal      |12     |                                                                            |
+|12300|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|12368|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|12376|chrome.exe                 |                                         |               |0     |Low         |18     |                                                                            |
+|12748|msedge.exe                 |                                         |               |0     |Normal      |10     |                                                                            |
+|12964|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|13000|splwow64.exe               |Print driver host for applications       |10.0.19041.2788|0     |Normal      |5      |                                                                            |
+|13112|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|13156|conhost.exe                |                                         |               |0     |Normal      |3      |                                                                            |
+|13180|svchost.exe                |Processo de Host para Serviços do Windows|10.0.19041.1806|0     |Normal      |4      |                                                                            |
+|14012|msedge.exe                 |                                         |               |0     |Normal      |14     |                                                                            |
+|14096|ConEmu64.exe               |                                         |               |0     |Normal      |9      |                                                                            |
+|14104|taskhostw.exe              |                                         |               |0     |Normal      |3      |                                                                            |
+|14496|SppExtComObj.Exe           |                                         |               |0     |Normal      |1      |                                                                            |
+|14780|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|14856|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|14908|msedge.exe                 |                                         |               |0     |Normal      |41     |                                                                            |
+|14976|chrome.exe                 |                                         |               |0     |Low         |15     |                                                                            |
+|15056|chrome.exe                 |                                         |               |0     |Low         |17     |                                                                            |
+|15084|bds.exe                    |Embarcadero RAD Studio for Windows       |25.0.26309.314 |0     |Normal      |42     |C:\Program Files (x86)\Embarcadero\Studio\19.0\bin                          |
+|15324|notepad.exe                |Bloco de notas                           |10.0.19041.1   |0     |Normal      |1      |                                                                            |
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Assembler Information:
+---------------------------------------------------------------------------------------
+; Vcl.Forms.TCustomForm.SetActiveControl (Line=5840 - Offset=3)
+; -------------------------------------------------------------
+006A32A9  call    System._CallDynaInst
+006A32AE  test    al, al
+006A32B0  jnz     Vcl.Forms.TCustomForm.SetActiveControl (Line=5844)
+;
+; Line=5843 - Offset=6
+; --------------------
+006A32B2  lea     edx, [ebp-$04]
+006A32B5  mov     eax, dword ptr [QuickRpt.Initialization (Line=7155)]
+006A32BA  call    System.LoadResString
+006A32BF  mov     ecx, [ebp-$04]
+006A32C2  mov     dl, $01
+006A32C4  mov     eax, dword ptr [System.Classes..EInvalidOperation]
+006A32C9  call    System.SysUtils.Exception.Create
+006A32CE  call    System._RaiseExcept                                   ; <-- EXCEPTION
+;
+; Line=5844 - Offset=7
+; --------------------
+006A32D3  mov     [ebx+$02C4], edi
+;
+; Line=5845 - Offset=8
+; --------------------
+006A32D9  test    byte ptr [ebx+$1C], $01
+006A32DD  jnz     Vcl.Forms.TCustomForm.SetActiveControl (Line=5851)
+;
+; Line=5847 - Offset=10
+; ---------------------
+006A32DF  cmp     byte ptr [ebx+$02D1], $00
+006A32E6  jz      Vcl.Forms.TCustomForm.SetActiveControl (Line=5848)
+006A32E8  mov     eax, ebx
+006A32EA  call    Vcl.Forms.TCustomForm.SetWindowFocus
+;
+; Line=5848 - Offset=11
+; ---------------------
+006A32EF  mov     eax, ebx
+006A32F1  mov     si, $FFAB
+006A32F5  call    System._CallDynaInst
+
+Registers:
+-----------------------------
+EAX: 04FEF280   EDI: 03BD2F20
+EBX: 04FC0420   ESI: 005C9AF0
+ECX: 00495600   ESP: 0019E36C
+EDX: 006A32D3   EIP: 006A32CE
+
+Stack:               Memory Dump:
+------------------   ---------------------------------------------------------------------------
+0019E36C: 0019E544 03C15530: E8 91 6F D6 FF 89 BB C4 02 00 00 F6 43 1C 01 75  ..o.........C..u
+0019E370: 0040A140 03C15540: 1B 80 BB D1 02 00 00 00 74 07 8B C3 E8 A5 03 00  ........t.......
+0019E374: 0019E388 03C15550: 00 8B C3 66 BE AB FF E8 96 5D D6 FF 33 C0 5A 59  ...f.....]..3.ZY
+0019E378: 03BD2F20 03C15560: 59 64 89 10 68 17 33 6A 00 8D 45 FC E8 95 78 D6  Yd..h.3j..E...x.
+0019E37C: 005C801C 03C15570: FF C3 E9 AB 6D D6 FF EB F0 5F 5E 5B 59 5D C3 8D  ....m...._^[Y]..
+0019E380: 00000001 03C15580: 40 00 3B 90 18 03 00 00 74 10 89 90 18 03 00 00  @.;.....t.......
+0019E384: 00000000 03C15590: 85 D2 74 06 92 E8 FC FC E2 FF C3 8D 40 00 53 56  ..t.........@.SV
+0019E388: 04FC0420 03C155A0: 57 8B D9 8B F2 8B F8 84 DB 74 1A 8B 97 C8 02 00  W........t......
+0019E38C: 006A33DC 03C155B0: 00 8B C6 E8 C2 1C F2 FF 84 C0 74 09 8B 46 40 89  ..........t..F@.
+0019E390: 0019E3B4 03C155C0: 87 C8 02 00 00 8B 97 C4 02 00 00 8B C6 E8 A8 1C  ................
+0019E394: 0000B01B 03C155D0: F2 FF 84 C0 74 09 33 D2 8B C7 E8 E3 FE FF FF 5F  ....t.3........_
+0019E398: 005C801C 03C155E0: 5E 5B C3 8D 40 00 53 56 57 55 8B FA 8B E8 0F B6  ^[..@.SVWU......
+0019E39C: 03BD2F20 03C155F0: 9D D1 02 00 00 84 DB 74 3C 80 BD D2 02 00 00 01  .......t<.......
+0019E3A0: 005C9B47 03C15600: 75 33 85 FF 74 2F 3B BD C4 02 00 00 75 27 8B C7  u3..t/;.....u'..
+0019E3A4: 03C6C0A0 03C15610: E8 D5 6B F2 FF 84 C0 74 1C 8B C7 66 BE B0 FF E8  ..k....t...f....
+0019E3A8: 0093A399 03C15620: CE 5C D6 FF 84 C0 75 0D 8B C7 E8 E7 67 F2 FF 50  .\....u.....g..P
+
+
+

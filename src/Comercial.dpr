@@ -1,6 +1,7 @@
 program Comercial;
 
 uses
+  ExceptionLog,
   Vcl.Forms,
   Vcl.Themes,
   Vcl.Styles,
