@@ -257,7 +257,8 @@ begin
   else
     begin
       SetPrecoUnitario;
-      edtQauntidade.SetFocus;
+      if pnlAtributes.Enabled then
+        edtQauntidade.SetFocus;
     end;
 end;
 
