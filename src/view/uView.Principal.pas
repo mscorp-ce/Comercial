@@ -4,8 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Menus,
-  ExceptionLog;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Buttons, Vcl.ExtCtrls, Vcl.Menus;
 
 type
   TfrmPrincipal = class(TForm)
@@ -24,7 +23,6 @@ type
     Clientes2: TMenuItem;
     Movimentaes2: TMenuItem;
     Vendas2: TMenuItem;
-    EurekaLog1: TEurekaLog;
     procedure Clientes1Click(Sender: TObject);
     procedure Fornecedores1Click(Sender: TObject);
     procedure Produto1Click(Sender: TObject);
