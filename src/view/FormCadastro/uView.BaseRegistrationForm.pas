@@ -30,7 +30,7 @@ type
     { Protected declarations }
     procedure GetProperty; virtual; abstract;
     procedure SetProperty; virtual; abstract;
-    procedure Save; virtual; abstract;
+    function Save: Boolean; virtual; abstract;
     procedure AfterSave; virtual; abstract;
     procedure AddFocus; virtual; abstract;
 

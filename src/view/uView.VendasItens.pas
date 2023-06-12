@@ -138,15 +138,13 @@ end;
 
 procedure TfrmVendasItens.AddItens;
 begin
-  //if not FEditing then
-
-  SQLItens;
-
   if (FEditing) and (not Itens.IsEmpty) then
     begin
       Itens.Locate('item', StrToIntDef(edtItem.Text, 0), [loPartialKey]);
       Itens.Delete;
     end;
+
+  Itens.Open;
 
   Itens.Append;
   Itensidvenda.AsInteger:= StrToIntDef(edtIdVenda.Text, 0);
@@ -160,6 +158,7 @@ begin
   Itens.Open;
 
   pnlAtributes.Enabled:= False;
+  FEditing:= False;
   LimparCampos;
   spbIncluir.Enabled:= True;
 end;
@@ -198,7 +197,7 @@ var
   Produtos: TObjectList<TProduto>;
 begin
   inherited;
-  if FEditing then
+  if (FEditing) and (Itens.IsEmpty) then
     Itens.CreateDataSet;
   Itens.Open;
 
@@ -210,7 +209,7 @@ begin
         HabilitarControles([True, False])
     end
   else
-    HabilitarControles([False, True]);
+    HabilitarControles([True, True]);
 
   ProdutoContext:= TProdutoContext.Create;
   try
@@ -236,6 +235,7 @@ procedure TfrmVendasItens.Incluir;
 begin
   pnlAtributes.Enabled:= True;
 
+  LimparCampos;
   AddIdentificadorVendaItem;
 
   lcbProduto.OnExit:= nil;

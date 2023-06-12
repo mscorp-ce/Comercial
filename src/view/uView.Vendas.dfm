@@ -3,6 +3,7 @@ inherited frmVenda: TfrmVenda
   ClientWidth = 922
   OnActivate = FormActivate
   ExplicitWidth = 938
+  ExplicitHeight = 365
   PixelsPerInch = 96
   TextHeight = 13
   object lblIdVenda: TLabel [0]
@@ -996,7 +997,7 @@ inherited frmVenda: TfrmVenda
     Width = 788
     Height = 262
     TabOrder = 5
-    object DBGrid1: TDBGrid
+    object grdVendaItens: TDBGrid
       Left = 1
       Top = 3
       Width = 786

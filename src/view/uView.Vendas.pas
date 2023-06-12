@@ -24,7 +24,7 @@ type
     cdsVendaItens: TClientDataSet;
     dsVendaItens: TDataSource;
     Panel1: TPanel;
-    DBGrid1: TDBGrid;
+    grdVendaItens: TDBGrid;
     lblStatus: TLabel;
     cbxStatus: TComboBox;
     cdsClientesidcliente: TIntegerField;
@@ -72,7 +72,7 @@ type
     procedure AddFocus; override;
     procedure GetProperty; override;
     procedure SetProperty; override;
-    procedure Save; override;
+    function Save: Boolean; override;
     procedure AfterSave; override;
 
     procedure Frist; override;
@@ -106,11 +106,12 @@ uses
   uController.DataConverter.VendaItem, uController.Format, uController.VendaItem,
   System.DateUtils;
 
-procedure TfrmVenda.Save;
+function TfrmVenda.Save: Boolean;
 var
   IsSaved: Boolean;
 begin
   inherited;
+  Result:= False;
 
   HabilitarControles([True, True, True, False]);
 
@@ -168,6 +169,7 @@ begin
       end;
     dsBrowse: Close;
   end;
+  Result:= True;
 end;
 
 procedure TfrmVenda.SaveItens;
@@ -233,9 +235,18 @@ begin
 end;
 
 procedure TfrmVenda.spbAlterarClick(Sender: TObject);
+var
+  Statement: IStatement;
 begin
   inherited;
-  State:= dsEdit;
+
+  Statement:= ControllerVenda.FindExists(ctSQLVendaFindID, 'idvenda', ftInteger, cdsVendaItensidvenda.AsInteger);
+
+  if Statement.Query.FieldByName('idvenda').AsInteger > 0 then
+    State:= dsEdit
+  else
+    State:= dsInsert;
+
   UpdateItem(cdsVendaItensidvenda.AsInteger, cdsVendaItensitem.AsInteger);
   HabilitarControles([True, True, True, True]);
 end;
@@ -323,8 +334,10 @@ begin
       SetVendaItem(VendaItem);
 
       frmVendasItens.IdVenda:= Venda.IdVenda;
+      frmVendasItens.Item:= GetItem;
       frmVendasItens.Editing:= True;
       frmVendasItens.SetVendaItem(VendaItem);
+      frmVendasItens.Itens.Data:= cdsVendaItens.Data;
       frmVendasItens.ShowModal;
 
       if not frmVendasItens.Itens.IsEmpty then
@@ -332,10 +345,8 @@ begin
           cdsVendaItens.Data:= frmVendasItens.Itens.Data;
           cdsVendaItens.Open;
           GetTotalizadores;
-          Save;
-          //RemoverItens;
-          //SaveItens;
-          SQLItens;
+          if Save then
+            SQLItens;
         end;
     finally
       FreeAndNil(VendaItem);
@@ -526,26 +537,12 @@ begin
   inherited;
   ControllerVenda:= TControllerVenda.Create;
 
-  {spbRestaurar.Enabled:= State = dsEdit;
-  spbRestaurar.Visible:= State = dsEdit;
-
-  spbFrist.Enabled:= State = dsBrowse;
-  spbFrist.Visible:= State = dsBrowse;
-  spbPrevious.Enabled:= State = dsBrowse;
-  spbPrevious.Visible:= State = dsBrowse;
-  spbNext.Enabled:= State = dsBrowse;
-  spbNext.Visible:= State = dsBrowse;
-  spbLast.Enabled:= State = dsBrowse;
-  spbLast.Visible:= State = dsBrowse;}
-
   SQLItens;
 
-  HabilitarControles([True, False, False, True]);
-
-  {if cdsVendaItens.IsEmpty then
+  if cdsVendaItens.IsEmpty then
     HabilitarControles([True, False, False, True])
   else
-    HabilitarControles([True, True, True, True]);}
+    HabilitarControles([True, True, True, True]);
 
   cpDtVenda.Date:= Now;
 

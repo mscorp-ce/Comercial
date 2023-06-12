@@ -42,7 +42,7 @@ type
     procedure AddFocus; override;
     procedure GetProperty; override;
     procedure SetProperty; override;
-    procedure Save; override;
+    function Save: Boolean; override;
     procedure AfterSave; override;
 
     procedure Frist; override;
@@ -73,9 +73,10 @@ uses
   uController.DataConverter.Fornecedor, uController.Produto, uModel.Entities.Fornecedor,
   uConntoller.FornecedorContext, uController.Format;
 
-procedure TfrmProduto.Save;
+function TfrmProduto.Save: Boolean;
 begin
   inherited;
+  Result:= False;
   //tratameno para não da erro de EVariantTypeCastError variant of type (Null) into type (Integer)'.
   if lcbFornecedor.KeyValue = Null then
     begin
@@ -108,6 +109,7 @@ begin
       end;
     dsBrowse: Close;
   end;
+  Result:= True;
 end;
 
 procedure TfrmProduto.SetId(const Value: Integer);

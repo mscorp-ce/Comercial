@@ -35,7 +35,7 @@ type
     procedure AddFocus; override;
     procedure GetProperty; override;
     procedure SetProperty; override;
-    procedure Save; override;
+    function Save: Boolean; override;
     procedure AfterSave; override;
 
     procedure Frist; override;
@@ -65,7 +65,7 @@ uses
   System.Generics.Collections, uController.RootCliente, uModel.ConstsStatement,
   uController.DataConverter.Cliente, uController.Venda, uController.Cliente;
 
-procedure TfrmCliente.Save;
+function TfrmCliente.Save: Boolean;
 begin
   inherited;
   SetProperty;
@@ -91,6 +91,7 @@ begin
       end;
     dsBrowse: Close;
   end;
+  Result:= True;
 end;
 
 procedure TfrmCliente.SetId(const Value: Integer);

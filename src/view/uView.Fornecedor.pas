@@ -35,7 +35,7 @@ type
     procedure AddFocus; override;
     procedure GetProperty; override;
     procedure SetProperty; override;
-    procedure Save; override;
+    function Save: Boolean; override;
     procedure AfterSave; override;
 
     procedure Frist; override;
@@ -65,7 +65,7 @@ uses
   System.Generics.Collections, uController.RootFornecedor, uModel.ConstsStatement,
   uController.DataConverter.Fornecedor, uController.Fornecedor;
 
-procedure TfrmFornecedor.Save;
+function TfrmFornecedor.Save: Boolean;
 begin
   inherited;
   SetProperty;
@@ -92,6 +92,7 @@ begin
       end;
     dsBrowse: Close;
   end;
+  Result:= True;
 end;
 
 procedure TfrmFornecedor.SetId(const Value: Integer);
