@@ -92,7 +92,6 @@
         <Icon_MainIcon>Comercial_Icon.ico</Icon_MainIcon>
         <DCC_MapFile>3</DCC_MapFile>
         <DCC_DebugInformation>1</DCC_DebugInformation>
-        <DCC_Define>EUREKALOG;EUREKALOG_VER6;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -678,7 +677,7 @@
 <!-- EurekaLog First Line
 [Exception Log]
 EurekaLog Version=6105
-Activate=1
+Activate=0
 Activate Handle=1
 Save Log File=1
 Foreground Tab=0

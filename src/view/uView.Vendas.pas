@@ -540,12 +540,12 @@ begin
 
   SQLItens;
 
-  //HabilitarControles([True, False, False, True]);
+  HabilitarControles([True, False, False, True]);
 
-  if cdsVendaItens.IsEmpty then
+  {if cdsVendaItens.IsEmpty then
     HabilitarControles([True, False, False, True])
   else
-    HabilitarControles([True, True, True, True]);
+    HabilitarControles([True, True, True, True]);}
 
   cpDtVenda.Date:= Now;
 
